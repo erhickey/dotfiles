@@ -1,0 +1,13 @@
+[user]
+    email = erhickey@gmail.com
+    name = Ed Hickey
+[pull]
+    ff = only
+[core]
+    editor = vim
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = false
+[alias]
+    difftool = vimdiff

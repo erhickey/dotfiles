@@ -1,0 +1,11 @@
+set bell-style none
+set editing-mode vi
+
+set keymap vi-command
+Control-l: clear-screen
+
+set keymap vi-insert
+Control-l: clear-screen
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
