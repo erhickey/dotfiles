@@ -48,6 +48,8 @@ hi clear cursorline " clear cursorline, leave enabled for cursorlinenr
 " remove current line number underline
 hi cursorlinenr cterm=bold
 
+set colorcolumn=121
+
 set formatoptions+=j " delete comment character when joining lines
 
 let mapleader="\<Space>"
