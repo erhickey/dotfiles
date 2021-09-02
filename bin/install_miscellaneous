@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+function get_file {
+    source_file="$1"
+    target_file="$2"
+    pretty_label="$3"
+
+    printf 'Installing %s...' "$pretty_label"
+    (curl -fLso "$target_file" --create-dirs "$source_file" && \
+        printf 'done\n') || printf 'FAILED !!!\n'
+}
+
+get_file https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim ~/.vim/colors/solarized.vim "vim solarized colors"
+get_file https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark ~/.dircolors "solarized dir colors"
+get_file https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.bash ~/.bash_autoload/fzf-key-bindings.sh "fzf key bindings"
+
+TMP_DIR="$(mktemp -d "$HOME"/install.XXXX)"
+
+PET_URL="https://github.com/knqyf263/pet/releases/download/v0.3.6/pet_0.3.6_linux_amd64.tar.gz"
+
+printf '\nInstalling pet, sudo password may be asked for\n'
+(curl -Lso "$TMP_DIR/pet.tar.gz" "$PET_URL" && \
+    tar -C "$TMP_DIR" -xf "$TMP_DIR"/pet.tar.gz && \
+    sudo cp "$TMP_DIR"/pet /usr/bin/pet && \
+    printf 'pet install complete\n') || printf '\npet install FAILED !!!\n\n'
+
+rm -rf "$TMP_DIR"

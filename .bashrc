@@ -19,6 +19,7 @@ export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
 export HISTSIZE=100000
 export HISTFILESIZE=100000
 export GREP_COLOR='48;5;3;38;5;7'
+eval $(dircolors "$HOME"/.dircolors)
 
 export COLOR_RESET="\\e[0m"
 export FG_DEFAULT="\\e[12m"

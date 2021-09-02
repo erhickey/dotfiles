@@ -1,0 +1,8 @@
+{
+  "haskell": {
+    "hlintOn": true,
+    "maxNumberOfProblems": 30,
+    "formatOnImportOn": true,
+    "formattingProvider": "brittany"
+  }
+}

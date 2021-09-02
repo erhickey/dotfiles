@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+LINE_MARKER="------------------------------------------"
+PLUGIN_DIR="$HOME"/.local/share/nvim/site/pack/git-plugins/start
+mkdir -p "$PLUGIN_DIR"
+
+function get_plugin {
+    git_repo="$1"
+    repo_name="$(basename "$git_repo" .git)"
+    install_location="$PLUGIN_DIR/$repo_name"
+
+    (printf 'Installing %s...' "$repo_name" && \
+        rm -rf "$install_location" && \
+        git clone -q "$git_repo" --depth=1 "$install_location" && \
+        printf 'done\n') || printf '\n%s\n!!! Failed to install %s !!!\n%s\n\n' "$LINE_MARKER" "$repo_name" "$LINE_MARKER"
+}
+
+get_plugin https://github.com/autozimu/LanguageClient-neovim.git && \
+(printf '\nRunning LanguageClient-neovim install script\n%s\n' "$LINE_MARKER" && \
+    cd "$PLUGIN_DIR"/LanguageClient-neovim && \
+    bash install.sh > /dev/null && \
+    printf '%s\ndone\n' "$LINE_MARKER") || printf '%s\n\n!!! LanguageClient-neovim install script Failure !!!\n\n' "$LINE_MARKER"

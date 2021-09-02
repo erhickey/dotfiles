@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+case "$(uname -r)" in
+
+    *Microsoft*)
+        clip.exe
+        ;;
+
+    *)
+        xclip -selection clipboard
+        ;;
+
+esac

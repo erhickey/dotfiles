@@ -1,0 +1,200 @@
+[[snippets]]
+  description = "fix command - bring up last command in editor"
+  command = "fc"
+  output = ""
+
+[[snippets]]
+  description = "create a 1gb file"
+  command = "dd if=/dev/zero of=<output_file=testfile> count=<num_blocks=1024> bs=<block_size=$((1024*1024))>"
+  output = ""
+
+[[snippets]]
+  description = "list processes owned by current user"
+  command = "ps -u $USER"
+  output = ""
+
+[[snippets]]
+  description = "turn debug on"
+  command = "set -x"
+  output = ""
+
+[[snippets]]
+  description = "exit on non-zero exit code"
+  command = "set -e"
+  output = ""
+
+[[snippets]]
+  description = "get public facing ip address"
+  command = "curl -<v4_or_v6=4> ifconfig.co"
+  output = ""
+
+[[snippets]]
+  description = "awk - print 4th and 15th fields of tab separated file"
+  command = "awk -F'\\t' '{printf \"%s %s\\n\", $4, $15}' file"
+  tag = ["awk"]
+  output = ""
+
+[[snippets]]
+  description = "start tmux with session name"
+  command = "tmux new -s <session_name=tmux_session>"
+  output = ""
+
+[[snippets]]
+  description = "attach to named tmux session"
+  command = "tmux a -t <session_name=tmux_session>"
+  output = ""
+
+[[snippets]]
+  description = "kill named tmux session"
+  command = "tmux kill-session -t <session_name=tmux_session>"
+  output = ""
+
+[[snippets]]
+  description = "list tmux sessions"
+  command = "tmux ls"
+  output = ""
+
+[[snippets]]
+  description = "clean up exited docker containers"
+  command = "docker rm $(docker ps -a -q -f status=exited)"
+  output = ""
+
+[[snippets]]
+  description = "find dangling images"
+  command = "docker images -f dangling=true"
+  output = ""
+
+[[snippets]]
+  description = "get host's ssl certificate"
+  command = "openssl s_client -showcerts -connect <host=google.com>:<port=443>"
+  output = ""
+
+[[snippets]]
+  description = "import host's ssl certificate into a new/existing keystore"
+  command = "keytool -import -alias <alias=cacerts> -file <esc1=<(openssl> s_client -showcerts -connect <host=google.com>:<port=443> <esc2=</dev/null> 2>/dev/null | openssl x509 -outform PEM) -keystore <keystore=cacerts>"
+  output = ""
+
+[[snippets]]
+  description = "list entries in a keystore"
+  command = "keytool -list -keystore <keystore=cacerts>"
+  output = ""
+
+[[snippets]]
+  description = "open appropriately sized bash shell for docker container"
+  command = "docker exec -it -e COLUMNS=\"$(tput cols)\" -e LINES=\"$(tput lines)\" <container=localdb> sh -c \"reset -w; bash\""
+  output = ""
+
+[[snippets]]
+  description = "open calculator"
+  command = "bc -l"
+  output = ""
+
+[[snippets]]
+  description = "improved readability mount command"
+  command = "mount | column -t"
+  output = ""
+
+[[snippets]]
+  description = "find and replace in all files, recursive"
+  command = "find . -type f -name \"*.<filetype=ts>\" -print0 | xargs 0 sed -i '' -e 's<regexp=/primeng\\/primeng/primeng/g>'"
+  output = ""
+
+[[snippets]]
+  description = "git merge only if fast forward is possible"
+  command = "git merge --ff-only <branch>"
+  output = ""
+
+[[snippets]]
+  description = "find file in current directory or subdirectories by name"
+  command = "find . -type f -name \"<file_name>\""
+  output = ""
+
+[[snippets]]
+  description = "Start Java process with debug enabled"
+  command = "java -Xdebug -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=y -cp <classpath=./*:./printcore.jar> <main=com.print.handlers.process.ProcessCreateCardPreview>"
+  output = ""
+
+[[snippets]]
+  description = "connect jdb"
+  command = "rlwrap jdb -sourcepath <sources=~/repositories/clarity/clarity/clarity:~/repositories/clarity/clarity/printcore> -connect com.sun.jdi.SocketAttach:hostname=localhost,port=<port=8000>"
+  output = ""
+
+[[snippets]]
+  description = "run gradle tasks with a custom trust store"
+  command = "./gradlew -Djavax.net.ssl.trustStore=<trustStorePath=/path/to/cacerts> -Djavax.net.ssl.keyStore=<keyStorePath=/path/to/cacerts> -Djavax.net.ssl.trustStorePassword=<trustStorePassword=changeit> -Djavax.net.ssl.keyStorePassword=<keyStorePassword=changeit> --no-daemon <gradle_task=clean>"
+  output = ""
+
+[[snippets]]
+  description = "get wireless interface names"
+  command = "iw dev"
+  output = ""
+
+[[snippets]]
+  description = "create wireless network configuration"
+  command = "wpa_passphrase <ssid=s> <passphrase=pw> > /etc/wpa_supplicant/wpa_supplicant-<interface_name=wlo1>.conf"
+  output = ""
+
+[[snippets]]
+  description = "start wireless interface in background, using given configuration"
+  command = "wpa_supplicant -B -i<interface_name=wlo1> -c/etc/wpa_supplicant/wpa_supplicant-<interface_name=wlo1>.conf"
+  output = ""
+
+[[snippets]]
+  description = "format partition - fat 32"
+  command = "mkfs.fat -F32 <partition=/dev/sda1>"
+  output = ""
+
+[[snippets]]
+  description = "setup parition as linux swap area - partition should be of hex type 82 (LINUX_SWAP)"
+  command = "mkswap <partition=/dev/sda2>"
+  output = ""
+
+[[snippets]]
+  description = "format partition - ext4"
+  command = "mkfs.ext <partition=/dev/sda3>"
+  output = ""
+
+[[snippets]]
+  description = "get partition uuids"
+  command = "blkid"
+  output = ""
+
+[[snippets]]
+  description = "create new UEFI boot entry"
+  command = "efibootmgr --disk <disk=/dev/sda> --part <partition=1> --create --label 'Linux' --loader <loader=/vmlinux-linux> --unicode 'root=PARTUUID=<partition_uuid=x> ro initrd=<initramfs=\\initramfs.img>' --verbose"
+  output = ""
+
+[[snippets]]
+  description = "create user"
+  command = "useradd <username=un>"
+  output = ""
+
+[[snippets]]
+  description = "set user password"
+  command = "passwd <username=un>"
+  output = ""
+
+[[snippets]]
+  description = "add user to group"
+  command = "usermod -aG <group=g> <username=un>"
+  output = ""
+
+[[snippets]]
+  description = "manage sudoers file"
+  command = "visudo"
+  output = ""
+
+[[snippets]]
+  description = "list block devices - hard drive/usb/etc"
+  command = "lsblk"
+  output = ""
+
+[[snippets]]
+  description = "write image to disk"
+  command = "dd if=<image=image.iso> of=<out=/dev/sd> status=progress"
+  output = ""
+
+[[snippets]]
+  description = "find xbps package with given library file"
+  command = "xbps-query -R -p shlib-provides -s <lib_file=libXss.so.1>"
+  output = ""

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+if [ $# -eq 0 ] ; then
+    dir=.
+else
+    dir="$1"
+fi
+
+case "$(uname -r)" in
+
+    *Microsoft*)
+        explorer.exe "$dir"
+        ;;
+
+    *)
+        xdg-open "$dir"
+        ;;
+
+esac
