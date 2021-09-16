@@ -198,3 +198,8 @@
   description = "find xbps package with given library file"
   command = "xbps-query -R -p shlib-provides -s <lib_file=libXss.so.1>"
   output = ""
+
+[[snippets]]
+  description = "create new ssh key"
+  command = "ssh-keygen -C \"<email@email.com>\""
+  output = ""

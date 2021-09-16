@@ -50,5 +50,17 @@ require'lspconfig'.hls.setup{
     }
 }
 
+-- npm install -g vscode-langservers-extracted
+require'lspconfig'.jsonls.setup{
+    on_attach = on_attach,
+    commands = {
+        Format = {
+            function()
+                vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+            end
+        }
+    }
+}
+
 -- npm install -g typescript-language-server
 require'lspconfig'.tsserver.setup{ on_attach = on_attach }
