@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-case "$(uname -r)" in
+case "$(uname -a)" in
 
     *Microsoft*)
         clip.exe
+        ;;
+
+    *Darwin*)
+        pbcopy
         ;;
 
     *)
