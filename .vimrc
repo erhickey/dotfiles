@@ -2,7 +2,15 @@ set background=dark
 color elflord
 
 if &t_Co > 8
-    color solarized
+  color solarized
+
+  if has('termguicolors')
+    set termguicolors
+    color solarized8_flat
+    " tmux true color fix required by some terminals
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  endif
 endif
 
 set encoding=utf-8
