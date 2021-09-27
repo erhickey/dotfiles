@@ -1,4 +1,4 @@
-require('telescope').setup({
+require('telescope').setup{
   defaults = {
     layout_strategy = 'vertical',
     layout_config = {
@@ -6,4 +6,4 @@ require('telescope').setup({
       preview_height = 0.6,
     },
   },
-})
+}

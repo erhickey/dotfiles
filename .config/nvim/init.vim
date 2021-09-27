@@ -5,4 +5,4 @@ source ~/.vimrc
 set termguicolors
 colorscheme solarized8_flat
 
-runtime ./plugins.vim
+lua require('plugins')

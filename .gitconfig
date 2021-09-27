@@ -11,3 +11,4 @@
     prompt = false
 [alias]
     difftool = vimdiff
+    changes = !git diff --stat $(sh -c 'git merge-base HEAD "${PARENT_BRANCH:=master}"')

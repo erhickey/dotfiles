@@ -10,10 +10,10 @@ set encoding=utf-8
 syntax enable " syntax highlighting
 set showmatch " highlight syntax matching [{()}]
 
-set tabstop=4 " number of spaces to visually replace tab with
+set tabstop=2 " number of spaces to visually replace tab with
 set expandtab " insert spaces instead of tab
-set softtabstop=4 " number of spaces inserted when tab is pressed
-set shiftwidth=4 " number of spaces used by auto-indent and following key strokes: >> << ==
+set softtabstop=2 " number of spaces inserted when tab is pressed
+set shiftwidth=2 " number of spaces used by auto-indent and following key strokes: >> << ==
 set autoindent
 
 set ignorecase " case insensitive search

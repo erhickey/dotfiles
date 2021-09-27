@@ -42,39 +42,83 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 
 -- npm install -g @angular/language-server
 require'lspconfig'.angularls.setup{
-    capabilities = capabilities,
-    on_attach = on_attach
+  capabilities = capabilities,
+  on_attach = on_attach
 }
 
 -- https://github.com/haskell/haskell-language-server
 require'lspconfig'.hls.setup{
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {
-        haskell = {
-            hLintOn = true,
-            maxNumberOfProblems = 30,
-            formatOnImportOn = true,
-            formattingProvider = "brittany"
-        }
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    haskell = {
+      hLintOn = true,
+      maxNumberOfProblems = 30,
+      formatOnImportOn = true,
+      formattingProvider = 'brittany'
     }
+  }
 }
 
 -- npm install -g vscode-langservers-extracted
 require'lspconfig'.jsonls.setup{
-    capabilities = capabilities,
-    on_attach = on_attach,
-    commands = {
-        Format = {
-            function()
-                vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-            end
-        }
+  capabilities = capabilities,
+  on_attach = on_attach,
+  commands = {
+    Format = {
+      function()
+        vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line('$'),0})
+      end
     }
+  }
 }
 
 -- npm install -g typescript-language-server
 require'lspconfig'.tsserver.setup{
-    capabilities = capabilities,
-    on_attach = on_attach
+  capabilities = capabilities,
+  on_attach = on_attach
+}
+
+-- npm install -g diagnostic-languageserver
+require'lspconfig'.diagnosticls.setup{
+  filetypes = {
+    'javascript',
+    'typescript'
+  },
+  init_options = {
+    filetypes = {
+      javascript = 'eslint',
+      typescript = 'eslint',
+    },
+    linters = {
+      -- npm install -g eslint_d
+      eslint = {
+        sourceName = 'eslint',
+        command = 'eslint_d',
+        rootPatterns = { 'node_modules' },
+        debounce = 100,
+        args = {
+          '--cache',
+          '--stdin',
+          '--stdin-filename',
+          '%filepath',
+          '--format',
+          'json',
+        },
+        parseJson = {
+          errorsRoot = '[0].messages',
+          line = 'line',
+          column = 'column',
+          endLine = 'endLine',
+          endColumn = 'endColumn',
+          message = '${message} [${ruleId}]',
+          security = 'severity',
+        },
+        securities = {
+          [2] = 'error',
+          [1] = 'warning',
+        }
+      }
+    }
+  }
 }
