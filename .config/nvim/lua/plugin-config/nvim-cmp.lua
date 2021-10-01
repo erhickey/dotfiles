@@ -7,8 +7,9 @@ cmp.setup{
     end
   },
   mapping = {
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<C-j>'] = cmp.mapping.confirm({ select = true }),
     ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
   },
   sources = {
     { name = 'nvim_lsp' },

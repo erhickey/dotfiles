@@ -51,7 +51,7 @@ set number relativenumber " hybrid line number gutter
 
 set cursorcolumn " highlight current column
 set cursorline " highlight current row
-hi clear cursorline " clear cursorline, leave enabled for cursorlinenr
+hi clear cursorline " clear cursorline highlight, leave enabled for cursorlinenr
 " remove current line number underline
 hi cursorlinenr cterm=bold
 
