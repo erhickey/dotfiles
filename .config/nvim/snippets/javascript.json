@@ -1,0 +1,15 @@
+{
+  "getter/setter": {
+    "prefix": ["~gs"],
+    "description": "class getter and setter",
+    "body": [
+      "get $1() {",
+      "\treturn this.$2;",
+      "}",
+      "",
+      "set $1(value) {",
+      "\tthis.$2 = value;",
+      "}"
+    ]
+  }
+}

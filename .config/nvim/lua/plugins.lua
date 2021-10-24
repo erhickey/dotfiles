@@ -10,6 +10,8 @@ vim.call('plug#begin')
 
     Plug 'tpope/vim-fugitive'
 
+    Plug 'mattn/emmet-vim'
+
     -- nvim-cmp and supporting sources
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-vsnip'
@@ -17,9 +19,11 @@ vim.call('plug#begin')
     Plug 'hrsh7th/cmp-path'
     Plug 'hrsh7th/nvim-cmp'
 
-    -- vsnip and supporting sources
+    -- vsnip, snippet engine is required by nvim-cmp
     Plug 'hrsh7th/vim-vsnip'
-    Plug 'rafamadriz/friendly-snippets'
+
+    -- required to add parens after nvim-cmp function completion
+    Plug 'windwp/nvim-autopairs'
 
     -- colored icons, required by other plugins
     Plug 'kyazdani42/nvim-web-devicons'
@@ -30,18 +34,15 @@ vim.call('plug#begin')
     -- identify lsp kinds with text/icon, requires nerdfont
     Plug 'onsails/lspkind-nvim'
 
-    -- enhance lsp ui
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-
     -- display function signature popup
     Plug 'ray-x/lsp_signature.nvim'
 
-    -- required to add parens after function completion
-    Plug 'windwp/nvim-autopairs'
-
     -- indicate modified lines in VCS managed files
     Plug 'mhinz/vim-signify'
+
+    -- enhance lsp ui
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
 
 vim.call('plug#end')
 

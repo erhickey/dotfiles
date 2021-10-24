@@ -8,7 +8,7 @@ cmp.setup{
   },
   mapping = {
     ['<C-e>'] = cmp.mapping.close(),
-    ['<C-j>'] = cmp.mapping.confirm({ select = true }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
     ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
   },
   sources = {
