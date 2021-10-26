@@ -40,9 +40,8 @@ vim.call('plug#begin')
     -- indicate modified lines in VCS managed files
     Plug 'mhinz/vim-signify'
 
-    -- enhance lsp ui
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
+    -- better quickfix window
+    Plug 'kevinhwang91/nvim-bqf'
 
     -- create closing html/xml tag when completing opening tag
     Plug 'alvan/vim-closetag'
