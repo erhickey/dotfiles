@@ -44,6 +44,11 @@ vim.call('plug#begin')
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
 
+    -- create closing html/xml tag when completing opening tag
+    Plug 'alvan/vim-closetag'
+    -- auto-update matching html/xml tag
+    Plug 'AndrewRadev/tagalong.vim'
+
 vim.call('plug#end')
 
 -- load all lua files in plugin-config

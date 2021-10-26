@@ -41,6 +41,7 @@ end
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- npm install -g @angular/language-server
+-- requires @angular/language-service development dependency in project
 require'lspconfig'.angularls.setup{
   capabilities = capabilities,
   on_attach = on_attach
