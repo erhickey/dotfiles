@@ -1,4 +1,4 @@
--- must be called after nvim-cmp config
+-- must be loaded after nvim-cmp config
 
 require('nvim-autopairs').setup{}
 
