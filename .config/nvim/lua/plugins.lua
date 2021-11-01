@@ -9,6 +9,7 @@ vim.call('plug#begin')
     Plug 'junegunn/fzf.vim'
 
     Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-commentary'
 
     Plug 'mattn/emmet-vim'
 
