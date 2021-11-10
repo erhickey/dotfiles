@@ -59,6 +59,10 @@ set colorcolumn=121
 
 set formatoptions+=j " delete comment character when joining lines
 
+" highlight non-ascii characters
+highlight link NonASCII Error
+autocmd Syntax * :syntax match NonASCII "[^\d0-\d127]"
+
 let mapleader="\<Space>"
 
 filetype plugin indent on

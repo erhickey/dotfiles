@@ -13,3 +13,4 @@ require('bufferline').setup{
 vim.api.nvim_set_keymap('n', '<a-n>', ':BufferLineCycleNext<CR>', { noremap = true, silent = true });
 vim.api.nvim_set_keymap('n', '<a-p>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true });
 vim.api.nvim_set_keymap('n', '<a-x>', ':bd<CR>', { noremap = true, silent = true });
+vim.api.nvim_set_keymap('n', '<a-X>', ':BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>', { noremap = true, silent = true });

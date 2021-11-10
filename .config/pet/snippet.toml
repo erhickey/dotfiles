@@ -130,8 +130,18 @@
   output = ""
 
 [[snippets]]
+  description = "scan wireless networks"
+  command = "iw dev <interface_name=wlo1> scan"
+  output = ""
+
+[[snippets]]
   description = "create wireless network configuration"
   command = "wpa_passphrase <ssid=s> <passphrase=pw> > /etc/wpa_supplicant/wpa_supplicant-<interface_name=wlo1>.conf"
+  output = ""
+
+[[snippets]]
+  description = "append wireless network configuration"
+  command = "wpa_passphrase <ssid=s> <passphrase=pw> >> /etc/wpa_supplicant/wpa_supplicant-<interface_name=wlo1>.conf"
   output = ""
 
 [[snippets]]
