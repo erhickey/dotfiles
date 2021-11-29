@@ -74,8 +74,20 @@ require'lspconfig'.jsonls.setup{
   }
 }
 
+-- npm install -g pyright
+require'lspconfig'.pyright.setup{
+  capabilities = capabilities,
+  on_attach = on_attach
+}
+
 -- npm install -g typescript-language-server
 require'lspconfig'.tsserver.setup{
+  capabilities = capabilities,
+  on_attach = on_attach
+}
+
+-- npm install -g vls
+require'lspconfig'.vuels.setup{
   capabilities = capabilities,
   on_attach = on_attach
 }

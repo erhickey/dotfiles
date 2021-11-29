@@ -213,3 +213,18 @@
   description = "create new ssh key"
   command = "ssh-keygen -C \"<email@email.com>\""
   output = ""
+
+[[snippets]]
+  description = "query display names"
+  command = "xrandr -q | grep connected"
+  output = ""
+
+[[snippets]]
+  description = "turn on display"
+  command = "xrandr --output <display_name=HDMI-1> --auto"
+  output = ""
+
+[[snippets]]
+  description = "turn off display"
+  command = "xrandr --output <display_name=LVDS-1> --off"
+  output = ""

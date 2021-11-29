@@ -1,5 +1,5 @@
 if [ -f /etc/bashrc ] ; then
-    source /etc/bashrc
+  source /etc/bashrc
 fi
 
 set -o vi
@@ -46,29 +46,36 @@ export BG_WHITE="\\e[48;5;12m"
 hostname="$(hostname)"
 host_color="$FG_CYAN"
 
-prompt_command()
-{
-    if [ $? -eq 0 ] ; then
-        unset error_prompt
-    else
-        error_prompt='-> ($?)'
-    fi
-
-    history -a
-    history -c
-    history -r
-
-    if cbranch="$(git symbolic-ref --short HEAD 2> /dev/null)"; then
-        git_branch="($cbranch)"
-    else
-        unset git_branch
-    fi
-
-    PS1="\\[$FG_ORANGE\\][\\[$FG_CYAN\\]\\u\\[$FG_CYAN\\]@\\[$host_color\\]$hostname\\[$FG_ORANGE\\]] \\[$FG_BLUE\\]\\w \\[$FG_GREEN\\]$git_branch\\[$FG_RED\\] $error_prompt\\[$COLOR_RESET\\]\\n\\[$FG_ORANGE\\][\\[$FG_YELLOW\\]\\t \\d\\[$FG_ORANGE\\]] \\[$FG_BLUE\\]$\\[$COLOR_RESET\\] "
+set_git_branch() {
+  if cbranch="$(git symbolic-ref --short HEAD 2> /dev/null)"; then
+      PS1_GIT_BRANCH="($cbranch)"
+  else
+      unset PS1_GIT_BRANCH
+  fi
 }
+
+set_error_prompt() {
+  if [ $? -eq 0 ] ; then
+      unset PS1_ERROR_PROMPT
+  else
+      PS1_ERROR_PROMPT="-> ($?)"
+  fi
+}
+
+prompt_command() {
+  set_error_prompt
+
+  history -a
+  history -c
+  history -r
+
+  set_git_branch
+}
+
+PS1="\\[$FG_ORANGE\\][\\[$FG_CYAN\\]\\u\\[$FG_CYAN\\]@\\[$host_color\\]$hostname\\[$FG_ORANGE\\]] \\[$FG_BLUE\\]\\w \\[$FG_GREEN\\]$(printf '$PS1_GIT_BRANCH')\\[$FG_RED\\] $(printf '$PS1_ERROR_PROMPT')\\[$COLOR_RESET\\]\\n\\[$FG_ORANGE\\][\\[$FG_YELLOW\\]\\t \\d\\[$FG_ORANGE\\]] \\[$FG_BLUE\\]$\\[$COLOR_RESET\\] "
 
 PROMPT_COMMAND=prompt_command
 
 for file in ~/.bash_autoload/* ; do
-    [ -e "$file" ] && source "$file"
+  [ -e "$file" ] && source "$file"
 done

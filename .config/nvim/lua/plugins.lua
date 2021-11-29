@@ -49,6 +49,9 @@ vim.call('plug#begin')
     -- auto-update matching html/xml tag
     Plug 'AndrewRadev/tagalong.vim'
 
+    -- easily jump to arbitraty point in view, requires tmux and python
+    Plug 'roy2220/easyjump.tmux'
+
 vim.call('plug#end')
 
 -- load all lua files in plugin-config
