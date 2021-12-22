@@ -21,8 +21,6 @@ local on_attach = function(client, bufnr)
 
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-
   buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('v', '<leader>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
@@ -44,7 +42,7 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 -- requires @angular/language-service development dependency in project
 require'lspconfig'.angularls.setup{
   capabilities = capabilities,
-  on_attach = on_attach
+  on_attach = on_attach,
 }
 
 -- https://github.com/haskell/haskell-language-server
@@ -77,26 +75,34 @@ require'lspconfig'.jsonls.setup{
 -- npm install -g pyright
 require'lspconfig'.pyright.setup{
   capabilities = capabilities,
-  on_attach = on_attach
+  on_attach = on_attach,
 }
 
--- npm install -g typescript-language-server
+-- npm install -g typescript typescript-language-server
 require'lspconfig'.tsserver.setup{
   capabilities = capabilities,
-  on_attach = on_attach
+  on_attach = on_attach,
 }
 
 -- npm install -g vls
 require'lspconfig'.vuels.setup{
   capabilities = capabilities,
-  on_attach = on_attach
+  on_attach = on_attach,
+  init_options = {
+    config = {
+      vetur = {
+        ignoreProjectWarning = true,
+      },
+    },
+  },
 }
 
 -- npm install -g diagnostic-languageserver
 require'lspconfig'.diagnosticls.setup{
   filetypes = {
     'javascript',
-    'typescript'
+    'typescript',
+    'vue'
   },
   init_options = {
     filetypes = {

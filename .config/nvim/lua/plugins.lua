@@ -6,6 +6,7 @@ vim.call('plug#begin')
 
     Plug 'editorconfig/editorconfig-vim'
 
+    Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
 
     Plug 'tpope/vim-fugitive'
@@ -51,6 +52,8 @@ vim.call('plug#begin')
 
     -- easily jump to arbitraty point in view, requires tmux and python
     Plug 'roy2220/easyjump.tmux'
+
+    Plug 'ivalkeen/vim-simpledb'
 
 vim.call('plug#end')
 

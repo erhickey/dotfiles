@@ -48,6 +48,7 @@ set listchars=tab:>\ ,trail:␣,extends:>,precedes:<,nbsp:@
 
 set ruler " line,column numbers
 set number relativenumber " hybrid line number gutter
+nnoremap <silent> <C-K> :set nonumber! norelativenumber!<CR>
 
 set cursorcolumn " highlight current column
 set cursorline " highlight current row

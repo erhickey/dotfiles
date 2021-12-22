@@ -19,7 +19,6 @@ export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
 export HISTSIZE=100000
 export HISTFILESIZE=100000
 export GREP_COLOR='48;5;3;38;5;7'
-[ -e "$HOME"/.dircolors ] && eval $(dircolors "$HOME"/.dircolors)
 
 export COLOR_RESET="\\e[0m"
 export FG_DEFAULT="\\e[12m"
@@ -79,3 +78,5 @@ PROMPT_COMMAND=prompt_command
 for file in ~/.bash_autoload/* ; do
   [ -e "$file" ] && source "$file"
 done
+
+[ -e "$HOME"/.dircolors ] && eval $(dircolors "$HOME"/.dircolors 2> /dev/null || gdircolors "$HOME"/.dircolors)
