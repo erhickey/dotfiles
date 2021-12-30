@@ -35,6 +35,11 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
 
   buf_set_keymap('n', '<leader>cl', '<cmd>lua vim.lsp.codelens.run()<CR>', opts)
+end
+
+local on_attach_with_codelens_refresh = function(client, bufnr)
+  on_attach(client, bufnr)
+  -- this is buggy when multiple language servers are attached to the same buffer
   vim.api.nvim_command('autocmd BufReadPost,CursorMoved,InsertLeave <buffer> lua vim.lsp.codelens.refresh()')
 end
 
@@ -50,7 +55,7 @@ require'lspconfig'.angularls.setup{
 -- https://github.com/haskell/haskell-language-server
 require'lspconfig'.hls.setup{
   capabilities = capabilities,
-  on_attach = on_attach,
+  on_attach = on_attach_with_codelens_refresh,
   settings = {
     haskell = {
       hLintOn = true,
@@ -104,12 +109,13 @@ require'lspconfig'.diagnosticls.setup{
   filetypes = {
     'javascript',
     'typescript',
-    'vue'
+    'vue',
   },
   init_options = {
     filetypes = {
       javascript = 'eslint',
       typescript = 'eslint',
+      vue = 'eslint',
     },
     linters = {
       -- npm install -g eslint_d
