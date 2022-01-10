@@ -14,6 +14,7 @@ if &t_Co > 8
 endif
 
 set encoding=utf-8
+set mouse=a
 
 syntax enable " syntax highlighting
 set showmatch " highlight syntax matching [{()}]
