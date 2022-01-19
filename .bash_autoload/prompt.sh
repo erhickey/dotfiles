@@ -28,7 +28,7 @@ set_error_prompt() {
   if [ $? -eq 0 ] ; then
     PS1_ERROR_PROMPT=""
   else
-    PS1_ERROR_PROMPT="$(printf '\e[38;5;1m\e[48;5;3m%s\e[38;5;8m\e[48;5;1m%s\e[38;5;1m\e[48;5;8m%s' "" "   $? " "")"
+    PS1_ERROR_PROMPT="$(printf '\e[38;5;3m\e[48;5;1m%s\e[38;5;8m\e[48;5;1m%s\e[38;5;1m\e[48;5;8m%s' " " "   $? " "")"
   fi
 }
 
@@ -51,6 +51,6 @@ prompt_command() {
   set_git_branch
 }
 
-PS1="\\[$BG_BLUE\\]\\[$FG_REVERSE\] \\w \\[$FG_BLUE\\]\\[$BG_RESET\\]$(printf '$PS1_GIT_BRANCH')\\[$COLOR_RESET\\]\\n\\[$BG_YELLOW\\]\\[$FG_REVERSE\\] $(printf '$COMMAND_DURATION_DISPLAY') \\[$BG_RESET\\]\\[$FG_YELLOW\\]$(printf '$PS1_ERROR_PROMPT')\\[$COLOR_RESET\\] "
+PS1="\\[$BG_BLUE\\]\\[$FG_REVERSE\] \\w\\[$FG_BLUE\\]\\[$BG_RESET\\]$(printf '$PS1_GIT_BRANCH')\\[$COLOR_RESET\\]\\n\\[$BG_YELLOW\\]\\[$FG_REVERSE\\] $(printf '$COMMAND_DURATION_DISPLAY') \\[$BG_RESET\\]\\[$FG_YELLOW\\]$(printf '$PS1_ERROR_PROMPT')\\[$COLOR_RESET\\] "
 
 PROMPT_COMMAND=prompt_command
