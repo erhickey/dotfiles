@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 pre_command_exec() {
+  printf '\e[0m'
+
   [ -n "$COMMAND_EXECUTING" ] && return
   COMMAND_EXECUTING=1
 
@@ -20,7 +22,7 @@ post_command_exec() {
     CD_MILLIS="$((COMMAND_DURATION - CD_SECS * 1000))"
     COMMAND_DURATION_DISPLAY="$CD_SECS.$(printf '%03d' "$CD_MILLIS")"
   fi
-  COMMAND_DURATION_DISPLAY="${COMMAND_DURATION_DISPLAY}s"
+  COMMAND_DURATION_DISPLAY="${COMMAND_DURATION_DISPLAY}s❩"
 }
 
 trap pre_command_exec DEBUG
@@ -29,13 +31,13 @@ set_error_prompt() {
   if [ $? -eq 0 ] ; then
     unset PS1_ERROR_PROMPT
   else
-    PS1_ERROR_PROMPT=" $?"
+    export PS1_ERROR_PROMPT=" $?"
   fi
 }
 
 set_git_branch() {
   if cbranch="$(git symbolic-ref --short HEAD 2> /dev/null)"; then
-    PS1_GIT_BRANCH="  $cbranch"
+    export PS1_GIT_BRANCH="  $cbranch"
   else
     unset PS1_GIT_BRANCH
   fi
@@ -52,6 +54,30 @@ prompt_command() {
   set_git_branch
 }
 
-PS1="\\[$FG_BLUE\]\\w\\[$FG_YELLOW\\]$(printf "%s" '$PS1_GIT_BRANCH')\\[$FG_RED\\]$(printf "%s" '$PS1_ERROR_PROMPT')\\[$COLOR_RESET\\]\\n\\[$FG_ORANGE\\]$(printf "%s" '$COMMAND_DURATION_DISPLAY')\\[$COLOR_RESET\\]"
+COLOR_RESET="\\[\\e[0m\\]"
+BOLD_TEXT="\\[\\e[1m\\]"
+FG_RESET="\\e[38;5;12m\\]"
+BG_RESET="\\e[48;5;8m\\]"
+
+FG_RED="\\[\\e[38;5;1m\\]"
+FG_GREEN="\\[\\e[38;5;2m\\]"
+FG_YELLOW="\\[\\e[38;5;3m\\]"
+FG_BLUE="\\[\\e[38;5;4m\\]"
+FG_CYAN="\\[\\e[38;5;6m\\]"
+FG_WHITE="\\[\\e[38;5;7m\\]"
+FG_ORANGE="\\[\\e[38;5;9m\\]"
+FG_BLACK="\\[\\e[38;5;16m\\]"
+FG_REVERSE="\\[\\e[38;5;8m\\]"
+
+BG_RED="\\[\\e[48;5;1m\\]"
+BG_GREEN="\\[\\e[48;5;2m\\]"
+BG_YELLOW="\\[\\e[48;5;3m\\]"
+BG_BLUE="\\[\\e[48;5;4m\\]"
+BG_CYAN="\\[\\e[48;5;6m\\]"
+BG_WHITE="\\[\\e[48;5;7m\\]"
+BG_ORANGE="\\[\\e[48;5;9m\\]"
+BG_BLACK="\\[\\e[48;5;16m\\]"
+
+PS1="$BOLD_TEXT$FG_BLUE\\w$FG_YELLOW$(printf '$PS1_GIT_BRANCH')$FG_RED$(printf '$PS1_ERROR_PROMPT')\\n$FG_ORANGE$(printf '$COMMAND_DURATION_DISPLAY')$FG_CYAN "
 
 PROMPT_COMMAND=prompt_command
