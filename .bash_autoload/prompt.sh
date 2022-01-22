@@ -28,10 +28,11 @@ post_command_exec() {
 trap pre_command_exec DEBUG
 
 set_error_prompt() {
-  if [ $? -eq 0 ] ; then
+  local return_code="$?"
+  if [ "$return_code" -eq 0 ] ; then
     unset PS1_ERROR_PROMPT
   else
-    export PS1_ERROR_PROMPT=" $?"
+    export PS1_ERROR_PROMPT=" ${return_code}"
   fi
 }
 

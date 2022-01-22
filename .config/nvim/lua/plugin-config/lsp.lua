@@ -110,12 +110,14 @@ require'lspconfig'.diagnosticls.setup{
     'javascript',
     'typescript',
     'vue',
+    'sh'
   },
   init_options = {
     filetypes = {
       javascript = 'eslint',
       typescript = 'eslint',
       vue = 'eslint',
+      sh = 'shellcheck'
     },
     linters = {
       -- npm install -g eslint_d
@@ -135,15 +137,36 @@ require'lspconfig'.diagnosticls.setup{
         parseJson = {
           errorsRoot = '[0].messages',
           line = 'line',
-          column = 'column',
           endLine = 'endLine',
+          column = 'column',
           endColumn = 'endColumn',
-          message = '${message} [${ruleId}]',
           security = 'severity',
+          message = '${message} [${ruleId}]',
         },
         securities = {
           [2] = 'error',
           [1] = 'warning',
+        }
+      },
+      shellcheck = {
+        sourceName = 'shellcheck',
+        command = 'shellcheck',
+        debounce = 100,
+        args = { '--format', 'json1', '-' },
+        parseJson = {
+          errorsRoot= 'comments',
+          sourceName= 'file',
+          line = 'line',
+          endLine = 'endLine',
+          column = 'column',
+          endColumn = 'endColumn',
+          security = 'level',
+          message = '${message} [${code}] [${fix}]'
+        },
+        securities = {
+          error = 'error',
+          warning = 'warning',
+          note = 'info'
         }
       }
     }
