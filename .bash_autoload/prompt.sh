@@ -32,7 +32,7 @@ set_error_prompt() {
   if [ "$return_code" -eq 0 ] ; then
     unset PS1_ERROR_PROMPT
   else
-    export PS1_ERROR_PROMPT=" ${return_code}"
+    export PS1_ERROR_PROMPT=" ${return_code}"
   fi
 }
 
