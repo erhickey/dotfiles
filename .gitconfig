@@ -1,14 +1,16 @@
 [user]
-    email = erhickey@gmail.com
-    name = Ed Hickey
+  email = erhickey@gmail.com
+  name = Ed Hickey
 [pull]
-    ff = only
+  ff = only
+[merge]
+  conflictStyle = diff3
 [core]
-    editor = vim
+  editor = vim
 [diff]
-    tool = vimdiff
+  tool = vimdiff
 [difftool]
-    prompt = false
+  prompt = false
 [alias]
-    difftool = vimdiff
-    changes = !git diff --stat $(sh -c 'git merge-base HEAD "${PARENT_BRANCH:=master}"')
+  difftool = vimdiff
+  changes = !git diff --stat $(sh -c 'git merge-base HEAD "${PARENT_BRANCH:=master}"')
