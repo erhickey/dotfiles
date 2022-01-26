@@ -78,7 +78,7 @@ window:
   #title: Alacritty
 
   # Allow terminal applications to change Alacritty's window title.
-  #dynamic_title: true
+  dynamic_title: false
 
   # Window class (Linux/BSD only):
   #class:
@@ -175,9 +175,7 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: true
 
-# Colors (Tomorrow Night)
 colors:
-  # Default colors
   primary:
     background: '0x002b36'
     foreground: '0x839496'
