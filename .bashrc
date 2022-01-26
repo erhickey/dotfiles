@@ -22,6 +22,8 @@ for file in ~/.bash_autoload/* ; do
   [ -e "$file" ] && source "$file"
 done
 
-# wait to use gnu coreutils until after they are accessible via path
+# on a mac one of the scripts in autoload should have added homebrew/bin to the path environment variable
+# use/alias gnu coreutils if they are now available
 [ -e "$HOME"/.dircolors ] && eval $(dircolors "$HOME"/.dircolors 2> /dev/null || gdircolors "$HOME"/.dircolors)
 command -v gdate &> /dev/null && alias date='gdate'
+command -v gls &> /dev/null && alias ls='gls --color=auto'
