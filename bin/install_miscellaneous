@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 function get_file {
-    source_file="$1"
-    target_file="$2"
-    pretty_label="$3"
+  source_file="$1"
+  target_file="$2"
+  pretty_label="$3"
 
-    printf 'Installing %s...' "$pretty_label"
-    (curl -fLso "$target_file" --create-dirs "$source_file" && \
-        printf 'done\n') || printf 'FAILED !!!\n'
+  printf 'Installing %s...' "$pretty_label"
+  (curl -fLso "$target_file" --create-dirs "$source_file" && \
+    printf 'done\n') || printf 'FAILED !!!\n'
 }
 
 get_file https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim ~/.vim/colors/solarized.vim "vim solarized colors"
@@ -41,9 +41,9 @@ else
 
   printf '\nInstalling pet...\n'
   (curl -Lso "$TMP_DIR/pet.tar.gz" "$PET_URL" && \
-      tar -C "$TMP_DIR" -xf "$TMP_DIR"/pet.tar.gz && \
-      sudo cp "$TMP_DIR"/pet /usr/bin/pet && \
-      printf 'pet install complete\n') || printf '\npet install FAILED !!!\n\n'
+    tar -C "$TMP_DIR" -xf "$TMP_DIR"/pet.tar.gz && \
+    sudo cp "$TMP_DIR"/pet /usr/bin/pet && \
+    printf 'pet install complete\n') || printf '\npet install FAILED !!!\n\n'
 
   rm -rf "$TMP_DIR"
 fi
