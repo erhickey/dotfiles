@@ -106,6 +106,8 @@ require'lspconfig'.vuels.setup{
 
 -- npm install -g diagnostic-languageserver
 require'lspconfig'.diagnosticls.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
   filetypes = {
     'javascript',
     'typescript',

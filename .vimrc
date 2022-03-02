@@ -69,6 +69,8 @@ let mapleader="\<Space>"
 
 filetype plugin indent on
 
+autocmd OptionSet diff if &diff | :syntax off | else | :syntax on | endif
+
 if &diff
-    syntax off
+  syntax off
 endif

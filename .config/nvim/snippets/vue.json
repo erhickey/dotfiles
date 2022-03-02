@@ -1,0 +1,16 @@
+{
+  "eslint-disable-line": {
+    "prefix": ["~edl"],
+    "description": "insert eslint-disable-line comment",
+    "body": [
+      "// eslint-disable-line"
+    ]
+  },
+  "eslint-disable-next-line": {
+    "prefix": ["~ednl"],
+    "description": "insert eslint-disable-next-line comment",
+    "body": [
+      "// eslint-disable-next-line"
+    ]
+  }
+}

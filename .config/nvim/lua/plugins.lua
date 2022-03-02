@@ -55,6 +55,8 @@ vim.call('plug#begin')
 
     Plug 'ivalkeen/vim-simpledb'
 
+    Plug 'rickhowe/diffchar.vim'
+
 vim.call('plug#end')
 
 -- load all lua files in plugin-config
