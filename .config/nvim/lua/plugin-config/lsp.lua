@@ -85,6 +85,12 @@ require'lspconfig'.pyright.setup{
   on_attach = on_attach,
 }
 
+-- https://github.com/lighttiger2505/sqls/releases
+require'lspconfig'.sqls.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
 -- npm install -g typescript typescript-language-server
 require'lspconfig'.tsserver.setup{
   capabilities = capabilities,
