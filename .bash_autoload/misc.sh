@@ -1,5 +1,5 @@
 function cht_tmux() {
-  read -p "Enter query: " query
+  read -p "? " query
   curl -s "cht.sh/$query" | bat --pager "less -R"
 }
 
