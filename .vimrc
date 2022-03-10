@@ -62,15 +62,9 @@ set colorcolumn=121
 set formatoptions+=j " delete comment character when joining lines
 
 " highlight non-ascii characters
-highlight link NonASCII Error
-autocmd Syntax * :syntax match NonASCII "[^\d0-\d127]"
+highlight nonascii guifg=#ffffff guibg=#ff0000 ctermfg=white ctermbg=red
+match nonascii "[^\d0-\d127]"
 
 let mapleader="\<Space>"
 
 filetype plugin indent on
-
-autocmd OptionSet diff if &diff | :syntax off | else | :syntax on | endif
-
-if &diff
-  syntax off
-endif
