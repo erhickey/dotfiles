@@ -30,8 +30,8 @@ else
   printf 'sudo '
   sudo get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Nerd-Font-Complete.ttf "Literation Mono Nerd Font"
   sudo get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Bold-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font Bold"
-  get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Italic%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Italic-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font Italic"
-  get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Bold%20Italic%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Bold-Italic-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font Bold Italic"
+  sudo get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Italic%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Italic-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font Italic"
+  sudo get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Bold%20Italic%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Bold-Italic-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font Bold Italic"
   printf '\nRebuilding font cache...\n'
   fc-cache -f -v
 
@@ -47,3 +47,18 @@ else
 
   rm -rf "$TMP_DIR"
 fi
+
+printf '\nInstalling tmux terminfo\n'
+
+mkdir "$HOME"/.terminfo
+
+cat <<EOF > "$HOME"/.terminfo/tmux.terminfo
+tmux|tmux,
+  ritm=\E[23m, rmso=\E[27m, sitm=\E[3m, smso=\E[7m, Ms@,
+  use=xterm, use=screen,
+
+tmux-256color|tmux with 256 colors,
+  use=xterm-256color, use=tmux,
+EOF
+
+tic -x "$HOME"/.terminfo/tmux.terminfo
