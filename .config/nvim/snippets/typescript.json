@@ -4,11 +4,11 @@
     "description": "class getter and setter",
     "body": [
       "get $1(): $2 {",
-      "\treturn this.$3;",
+      "\treturn this._$1;",
       "}",
       "",
       "set $1(value: $2) {",
-      "\tthis.$3 = value;",
+      "\tthis._$1 = value;",
       "}"
     ]
   },

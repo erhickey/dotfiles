@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # initial clone instructions:
 # git clone --bare -c status.showUntrackedFiles=no https://github.com/erhickey/dotfiles.git ~/repositories/dotfiles
 # dgit reset --hard

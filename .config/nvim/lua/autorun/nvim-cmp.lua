@@ -1,4 +1,4 @@
-local cmp = require'cmp'
+local cmp = require('cmp')
 
 cmp.setup{
   snippet = {
@@ -6,17 +6,18 @@ cmp.setup{
       vim.fn['vsnip#anonymous'](args.body)
     end
   },
-  mapping = {
+  mapping = cmp.mapping.preset.insert({
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm({ select = false }),
     ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
-  },
-  sources = {
+  }),
+  sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
+  }, {
     { name = 'buffer' },
     { name = 'path' },
-  },
+  }),
   formatting = {
     format = function(entry, vim_item)
       vim_item.kind = require('lspkind').presets.default[vim_item.kind] .. ' ' .. vim_item.kind
@@ -33,9 +34,10 @@ cmp.setup{
 }
 
 cmp.setup.filetype('sql', {
-  sources = {
+  sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
+  }, {
     {
       name = 'buffer',
       option = {
@@ -45,5 +47,5 @@ cmp.setup.filetype('sql', {
       }
     },
     { name = 'path' },
-  }
+  })
 })

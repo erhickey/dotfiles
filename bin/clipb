@@ -2,16 +2,16 @@
 
 case "$(uname -a)" in
 
-    *Microsoft*)
-        clip.exe
-        ;;
+  *Microsoft*)
+    clip.exe
+    ;;
 
-    *Darwin*)
-        pbcopy
-        ;;
+  *Darwin*)
+    pbcopy
+    ;;
 
-    *)
-        xclip -selection clipboard
-        ;;
+  *)
+    xclip -selection clipboard
+    ;;
 
 esac

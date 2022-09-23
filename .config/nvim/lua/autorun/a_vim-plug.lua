@@ -2,6 +2,9 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
 
+    Plug 'erhickey/diagline-nvim'
+    Plug 'erhickey/buffer-command-vim'
+
     Plug 'neovim/nvim-lspconfig'
 
     Plug 'editorconfig/editorconfig-vim'
@@ -21,7 +24,7 @@ vim.call('plug#begin')
     Plug 'hrsh7th/cmp-path'
     Plug 'hrsh7th/nvim-cmp'
 
-    -- vsnip, snippet engine is required by nvim-cmp
+    -- vsnip, a snippet engine is required by nvim-cmp
     Plug 'hrsh7th/vim-vsnip'
 
     -- required to add parens after nvim-cmp function completion
@@ -29,9 +32,6 @@ vim.call('plug#begin')
 
     -- colored icons, required by other plugins
     Plug 'kyazdani42/nvim-web-devicons'
-
-    -- tabs at top for each buffer, requires nerdfont
-    Plug 'akinsho/bufferline.nvim'
 
     -- identify lsp kinds with text/icon, requires nerdfont
     Plug 'onsails/lspkind-nvim'
@@ -50,20 +50,10 @@ vim.call('plug#begin')
     -- auto-update matching html/xml tag
     Plug 'AndrewRadev/tagalong.vim'
 
-    -- easily jump to arbitraty point in view, requires tmux and python
-    Plug 'roy2220/easyjump.tmux'
+    -- easily jump to arbitraty point in view
+    Plug 'easymotion/vim-easymotion'
 
+    -- simple database client plugin
     Plug 'ivalkeen/vim-simpledb'
 
-    Plug 'rickhowe/diffchar.vim'
-
 vim.call('plug#end')
-
--- load all lua files in plugin-config
--- files are loaded in order alphabetically
-for filename in io.popen('ls -pqAL "$HOME/.config/nvim/lua/plugin-config"'):lines() do
-  filename = filename:match'^(.*)%.lua$'
-  if filename then
-    require('plugin-config/'..filename)
-  end
-end

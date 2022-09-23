@@ -66,5 +66,6 @@ highlight nonascii guifg=#ffffff guibg=#ff0000 ctermfg=white ctermbg=red
 match nonascii "[^\d0-\d127]"
 
 let mapleader="\<Space>"
+set timeout timeoutlen=3000 ttimeoutlen=100
 
 filetype plugin indent on

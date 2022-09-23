@@ -1,23 +1,20 @@
 #!/usr/bin/env bash
 
-if [ $# -eq 0 ] ; then
-    dir=.
-else
-    dir="$1"
-fi
+dir=.
+[ $# -ge 0 ] && dir="$1"
 
 case "$(uname -a)" in
 
-    *Microsoft*)
-        explorer.exe "$dir"
-        ;;
+  *Microsoft*)
+    explorer.exe "$dir"
+    ;;
 
-    *Darwin*)
-        open "$dir"
-        ;;
+  *Darwin*)
+    open "$dir"
+    ;;
 
-    *)
-        xdg-open "$dir"
-        ;;
+  *)
+    xdg-open "$dir"
+    ;;
 
 esac

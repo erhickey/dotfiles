@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# install dependencies of configured apps
+
 function get_file {
   source_file="$1"
   target_file="$2"
@@ -14,8 +16,9 @@ get_file https://raw.githubusercontent.com/altercation/vim-colors-solarized/mast
 get_file https://raw.githubusercontent.com/lifepillar/vim-solarized8/master/colors/solarized8_flat.vim ~/.vim/colors/solarized8_flat.vim "vim solarized8_flat colors"
 get_file https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark ~/.dircolors "solarized dir colors"
 get_file https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.bash ~/.bash_autoload/fzf-key-bindings.sh "fzf key bindings"
+get_file https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.bash ~/.bash_autoload/fzf-completion.sh "fzf completion"
+get_file https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash ~/.bash_autoload/git-completion.bash "git autocompletion"
 get_file https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim ~/.local/share/nvim/site/autoload/plug.vim "vim-plug (don't forget to call :PlugInstall)"
-get_file https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash ~/.bash_autoload/git-completion.bash "git autocomplete script"
 
 if uname -a | grep -q 'Darwin' ; then
   get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Nerd%20Font%20Complete%20Mono.ttf ~/Downloads/Literation-Mono-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font"
@@ -28,24 +31,12 @@ if uname -a | grep -q 'Darwin' ; then
   open ~/Downloads/Literation-Mono-Bold-Italic-Nerd-Font-Complete-Mono.ttf
 else
   printf 'sudo '
-  sudo get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Nerd-Font-Complete.ttf "Literation Mono Nerd Font"
-  sudo get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Bold-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font Bold"
-  sudo get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Italic%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Italic-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font Italic"
-  sudo get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Bold%20Italic%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Bold-Italic-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font Bold Italic"
+  sudo sh -c 'get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Nerd-Font-Complete.ttf "Literation Mono Nerd Font"'
+  sudo sh -c 'get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Bold-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font Bold"'
+  sudo sh -c 'get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Italic%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Italic-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font Italic"'
+  sudo sh -c 'get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Bold%20Italic%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Bold-Italic-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font Bold Italic"'
   printf '\nRebuilding font cache...\n'
   fc-cache -f -v
-
-  TMP_DIR="$(mktemp -d "$HOME"/install.XXXX)"
-
-  PET_URL="https://github.com/knqyf263/pet/releases/download/v0.3.6/pet_0.3.6_linux_amd64.tar.gz"
-
-  printf '\nInstalling pet...\n'
-  (curl -Lso "$TMP_DIR/pet.tar.gz" "$PET_URL" && \
-    tar -C "$TMP_DIR" -xf "$TMP_DIR"/pet.tar.gz && \
-    sudo cp "$TMP_DIR"/pet /usr/bin/pet && \
-    printf 'pet install complete\n') || printf '\npet install FAILED !!!\n\n'
-
-  rm -rf "$TMP_DIR"
 fi
 
 printf '\nInstalling tmux terminfo\n'
