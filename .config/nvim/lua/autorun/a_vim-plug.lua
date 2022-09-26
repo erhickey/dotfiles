@@ -6,20 +6,16 @@ vim.call('plug#begin')
     -- LSP
     -- ----------------------
     Plug 'neovim/nvim-lspconfig'
-    -- identify lsp kinds with text/icon, requires nerdfont
-    Plug 'onsails/lspkind-nvim'
-    -- display function signature popup
-    Plug 'ray-x/lsp_signature.nvim'
+    Plug 'onsails/lspkind-nvim' -- identify lsp kinds with text/icon, requires nerdfont
+    Plug 'ray-x/lsp_signature.nvim' -- display function signature popup
 
     -- ----------------------
     -- treesitter
     -- ----------------------
     Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
-    Plug 'nvim-treesitter/nvim-treesitter-context'
-    -- make comment string context aware
-    Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-    -- rainbow colored pairs
-    Plug 'p00f/nvim-ts-rainbow'
+    Plug 'nvim-treesitter/nvim-treesitter-context' -- sticky context
+    Plug 'JoosepAlviste/nvim-ts-context-commentstring' -- make comment string context aware
+    Plug 'p00f/nvim-ts-rainbow' -- rainbow colored pairs
 
     -- ----------------------
     -- git
@@ -31,9 +27,8 @@ vim.call('plug#begin')
     -- markup language
     -- ----------------------
     Plug 'mattn/emmet-vim'
-    Plug 'alvan/vim-closetag'
-    -- auto-update matching html/xml tag
-    Plug 'AndrewRadev/tagalong.vim'
+    Plug 'alvan/vim-closetag' -- auto close html tags
+    Plug 'AndrewRadev/tagalong.vim' -- auto-update matching html/xml tag
 
     -- ----------------------
     -- nvim-cmp
@@ -44,10 +39,8 @@ vim.call('plug#begin')
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/cmp-path'
     Plug 'hrsh7th/nvim-cmp'
-    -- required to add parens after nvim-cmp function completion
-    Plug 'windwp/nvim-autopairs'
-    -- snippet engine is required by nvim-cmp
-    Plug 'hrsh7th/vim-vsnip'
+    Plug 'hrsh7th/vim-vsnip' -- snippet engine is required by nvim-cmp
+    Plug 'windwp/nvim-autopairs' -- required to add parens after nvim-cmp function completion
 
     -- ----------------------
     -- SQL
@@ -63,11 +56,7 @@ vim.call('plug#begin')
     Plug 'junegunn/fzf.vim'
     Plug 'erhickey/buffer-command-vim'
     Plug 'erhickey/diagline-nvim'
-    -- better quickfix window
-    Plug 'kevinhwang91/nvim-bqf'
-    -- easily jump to arbitraty point in view
-    Plug 'easymotion/vim-easymotion'
-    -- colored icons, required by other plugins
-    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'kevinhwang91/nvim-bqf' -- better quickfix window
+    Plug 'kyazdani42/nvim-web-devicons' -- colored icons, required by other plugins
 
 vim.call('plug#end')
