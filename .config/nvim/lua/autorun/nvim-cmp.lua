@@ -18,19 +18,6 @@ cmp.setup{
     { name = 'buffer' },
     { name = 'path' },
   }),
-  formatting = {
-    format = function(entry, vim_item)
-      vim_item.kind = require('lspkind').presets.default[vim_item.kind] .. ' ' .. vim_item.kind
-
-      vim_item.menu = ({
-        nvim_lsp = '[LSP]',
-        vsnip = '[Snippet]',
-        buffer = '[Buffer]',
-        path = '[Filesystem]',
-      })[entry.source.name]
-      return vim_item
-    end,
-  },
 }
 
 cmp.setup.filetype('sql', {
@@ -49,3 +36,13 @@ cmp.setup.filetype('sql', {
     { name = 'path' },
   })
 })
+
+-- Use buffer source for `/` and `?`
+for _,v in pairs({ '/', '?' }) do
+  cmp.setup.cmdline(v, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+end
