@@ -49,12 +49,19 @@ vim.call('plug#begin')
     -- ----------------------
     -- miscellaneous
     -- ----------------------
-    Plug 'editorconfig/editorconfig-vim'
     Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-repeat'
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
+    Plug 'editorconfig/editorconfig-vim'
     Plug 'kevinhwang91/nvim-bqf' -- better quickfix window
     Plug 'erhickey/buffer-command-vim'
     Plug 'erhickey/diagline-nvim'
+
+    -- Firenvim - nvim in the browser, requires browser addon
+    -- Firefox: https://addons.mozilla.org/en-US/firefox/addon/firenvim/
+    -- Chrome: https://chrome.google.com/webstore/detail/firenvim/egpjdkipkomnmjhjmdamaniclmdlobbo
+    Plug('glacambre/firenvim', { ['do'] = vim.fn['firenvim#install(0)'] })
 
 vim.call('plug#end')
