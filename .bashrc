@@ -11,6 +11,7 @@ alias grep='grep --color=auto'
 alias sh='bash'
 alias ssh='ssh -o ServerAliveInterval=240'
 command -v vim &> /dev/null && alias vi='vim'
+command -v nvim &> /dev/null && alias vi='nvim'
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
