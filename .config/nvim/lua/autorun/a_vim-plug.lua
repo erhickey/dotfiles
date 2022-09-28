@@ -44,7 +44,7 @@ vim.call('plug#begin')
     -- ----------------------
     -- SQL
     -- ----------------------
-    Plug 'ivalkeen/vim-simpledb' -- simple database client
+    Plug 'tpope/vim-dadbod'
 
     -- ----------------------
     -- miscellaneous
