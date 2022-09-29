@@ -17,8 +17,8 @@ get_file https://raw.githubusercontent.com/lifepillar/vim-solarized8/master/colo
 get_file https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark ~/.dircolors "solarized dir colors"
 get_file https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.bash ~/.bash_autoload/fzf-key-bindings.sh "fzf key bindings"
 get_file https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.bash ~/.bash_autoload/fzf-completion.sh "fzf completion"
-get_file https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash ~/.bash_autoload/git-completion.bash "git autocompletion"
-get_file https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim ~/.local/share/nvim/site/autoload/plug.vim "vim-plug (don't forget to call :PlugInstall)"
+get_file https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash ~/.bash_autoload/git-completion.bash "git completion"
+get_file https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim ~/.local/share/nvim/site/autoload/plug.vim "vim-plug"
 
 if uname -a | grep -q 'Darwin' ; then
   get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Nerd%20Font%20Complete%20Mono.ttf ~/Downloads/Literation-Mono-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font"
@@ -38,6 +38,7 @@ else
   printf '\nRebuilding font cache...\n'
   fc-cache -f -v
 fi
+
 
 printf '\nInstalling tmux terminfo\n'
 
