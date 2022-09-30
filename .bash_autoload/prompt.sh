@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+use_nerdfont() {
+  [ "$TERM" != linux ]
+}
+
 pre_command_exec() {
   printf '\e[0m'
 
@@ -22,7 +26,11 @@ post_command_exec() {
     CD_MILLIS="$((COMMAND_DURATION - CD_SECS * 1000))"
     COMMAND_DURATION_DISPLAY="$CD_SECS.$(printf '%03d' "$CD_MILLIS")"
   fi
-  COMMAND_DURATION_DISPLAY="${COMMAND_DURATION_DISPLAY}s❩"
+  if use_nerdfont ; then
+    COMMAND_DURATION_DISPLAY="${COMMAND_DURATION_DISPLAY}s❩"
+  else
+    COMMAND_DURATION_DISPLAY="${COMMAND_DURATION_DISPLAY}s)"
+  fi
 }
 
 trap pre_command_exec DEBUG
@@ -32,13 +40,21 @@ set_error_prompt() {
   if [ "$return_code" -eq 0 ] ; then
     unset PS1_ERROR_PROMPT
   else
-    export PS1_ERROR_PROMPT=" ${return_code}"
+    if use_nerdfont; then
+      export PS1_ERROR_PROMPT=" ${return_code}"
+    else
+      export PS1_ERROR_PROMPT=" <${return_code}>"
+    fi
   fi
 }
 
 set_git_branch() {
   if cbranch="$(git symbolic-ref --short HEAD 2> /dev/null)"; then
-    export PS1_GIT_BRANCH="  $cbranch"
+    if use_nerdfont; then
+      export PS1_GIT_BRANCH="  $cbranch"
+    else
+      export PS1_GIT_BRANCH=" | $cbranch"
+    fi
   else
     unset PS1_GIT_BRANCH
   fi
