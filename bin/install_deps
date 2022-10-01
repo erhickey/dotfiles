@@ -30,7 +30,7 @@ if uname -a | grep -q 'Darwin' ; then
   open ~/Downloads/Literation-Mono-Italic-Nerd-Font-Complete-Mono.ttf
   open ~/Downloads/Literation-Mono-Bold-Italic-Nerd-Font-Complete-Mono.ttf
 else
-  printf 'sudo '
+  printf 'installing fonts\nsudo '
   sudo sh -c 'get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Nerd-Font-Complete.ttf "Literation Mono Nerd Font"'
   sudo sh -c 'get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Bold-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font Bold"'
   sudo sh -c 'get_file https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/LiberationMono/complete/Literation%20Mono%20Italic%20Nerd%20Font%20Complete%20Mono.ttf /usr/share/fonts/TTF/Literation-Mono-Italic-Nerd-Font-Complete-Mono.ttf "Literation Mono Nerd Font Italic"'
