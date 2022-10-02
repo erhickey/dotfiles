@@ -43,6 +43,9 @@ for _,v in pairs({ '/', '?' }) do
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = 'buffer' }
+    },
+    {
+      { name = 'cmdline' }
     }
   })
 end
