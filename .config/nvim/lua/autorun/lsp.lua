@@ -87,6 +87,26 @@ lspconfig.jsonls.setup{
   }
 }
 
+-- install lua-language-server via package manager
+lspconfig.sumneko_lua.setup{
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        globals = {'vim'},
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
+
 -- npm install -g pyright
 lspconfig.pyright.setup{
   capabilities = capabilities,

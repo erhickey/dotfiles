@@ -23,8 +23,13 @@ in
         coreutils
         curl
         fd
+        findutils
         fzf
+        gawk
         git
+        gnugrep
+        gnutar
+        gnused
         jq
         unstable.neovim
         nodePackages.diagnostic-languageserver

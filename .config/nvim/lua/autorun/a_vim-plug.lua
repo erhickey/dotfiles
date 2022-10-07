@@ -6,7 +6,7 @@ vim.call('plug#begin')
     -- LSP
     -- ----------------------
     Plug 'neovim/nvim-lspconfig'
-    Plug 'ray-x/lsp_signature.nvim' -- function signature popup
+    Plug 'erhickey/sig-window-nvim'
 
     -- ----------------------
     -- treesitter
@@ -57,6 +57,7 @@ vim.call('plug#begin')
     Plug 'junegunn/fzf.vim'
     Plug 'editorconfig/editorconfig-vim'
     Plug 'kevinhwang91/nvim-bqf' -- better quickfix window
+    Plug 'roy2220/easyjump.tmux'
     Plug 'erhickey/buffer-command-vim'
     Plug 'erhickey/diagline-nvim'
 

@@ -68,4 +68,8 @@ match nonascii "[^\d0-\d127]"
 let mapleader="\<Space>"
 set timeout timeoutlen=3000 ttimeoutlen=100
 
+" move between paragrphs without storing the motion in the jumplist
+nnoremap <silent> } :<C-u>execute "keepjumps norm! " . v:count1 . "}"<CR>
+nnoremap <silent> { :<C-u>execute "keepjumps norm! " . v:count1 . "{"<CR>
+
 filetype plugin indent on

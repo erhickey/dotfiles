@@ -9,7 +9,7 @@ cmp.setup{
   mapping = cmp.mapping.preset.insert({
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm({ select = false }),
-    ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
+    ['<Tab>'] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Insert}),
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
