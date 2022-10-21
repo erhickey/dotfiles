@@ -6,6 +6,7 @@ vim.call('plug#begin')
     -- LSP
     -- ----------------------
     Plug 'neovim/nvim-lspconfig'
+    Plug 'williamboman/mason.nvim'
     Plug 'erhickey/sig-window-nvim'
 
     -- ----------------------

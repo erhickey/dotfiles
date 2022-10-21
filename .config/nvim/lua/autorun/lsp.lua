@@ -1,12 +1,44 @@
+require('mason').setup()
+
+local packages = {
+  'angular-language-server',    -- npm install -g @angular/language-server
+  'diagnostic-languageserver',  -- npm install -g diagnostic-languageserver
+  'eslint-lsp',                 -- npm install -g eslint_d
+  'flake8',                     -- python -m pip install -U flake8
+  'haskell-language-server',    -- https://github.com/haskell/haskell-language-server
+  'json-lsp',                   -- npm install -g vscode-langservers-extracted
+  'lua-language-server',        -- install via package manager
+  'mypy',                       -- python -m pip install -U mypy
+  'pyright',                    -- npm install -g pyright
+  'shellcheck',                 -- install via package manager
+  'sqls',                       -- https://github.com/lighttiger2505/sqls/releases
+  'typescript-language-server', -- npm install -g typescript typescript-language-server
+  'vue-language-server',        -- npm install -g @volar/vue-language-server
+  'vetur-vls',                  -- npm install -g vls
+}
+
+local mr = require('mason-registry')
+for _, p in pairs(packages) do
+  local package = mr.get_package(p)
+  if package:is_installed() then
+    package:check_new_version(function(is_new)
+      if is_new then
+        package:uninstall()
+        package:install()
+      end
+    end)
+  else
+    package:install()
+  end
+end
+
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
 
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
@@ -50,15 +82,18 @@ local lsp_flags = {
 
 local lspconfig = require('lspconfig')
 
--- npm install -g @angular/language-server
--- requires @angular/language-service development dependency in project
 lspconfig.angularls.setup{
   capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
 }
 
--- https://github.com/haskell/haskell-language-server
+lspconfig.eslint.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+
 lspconfig.hls.setup{
   capabilities = capabilities,
   on_attach = on_attach_with_codelens_refresh,
@@ -73,7 +108,6 @@ lspconfig.hls.setup{
   }
 }
 
--- npm install -g vscode-langservers-extracted
 lspconfig.jsonls.setup{
   capabilities = capabilities,
   on_attach = on_attach,
@@ -87,7 +121,6 @@ lspconfig.jsonls.setup{
   }
 }
 
--- install lua-language-server via package manager
 lspconfig.sumneko_lua.setup{
   settings = {
     Lua = {
@@ -107,28 +140,35 @@ lspconfig.sumneko_lua.setup{
   },
 }
 
--- npm install -g pyright
 lspconfig.pyright.setup{
   capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
 }
 
--- https://github.com/lighttiger2505/sqls/releases
 lspconfig.sqls.setup{
   capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
 }
 
--- npm install -g typescript typescript-language-server
 lspconfig.tsserver.setup{
   capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
 }
 
--- npm install -g vls
+lspconfig.volar.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+  flags = lsp_flags,
+  init_options = {
+    typescript = {
+      tsdk = '/Users/eddie/repositories/clearing-app/node_modules/typescript/lib/'
+    }
+  },
+}
+
 lspconfig.vuels.setup{
   capabilities = capabilities,
   on_attach = on_attach,
@@ -142,76 +182,20 @@ lspconfig.vuels.setup{
   },
 }
 
--- npm install -g @volar/vue-language-server
-lspconfig.volar.setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-  filetypes = {
-    'typescript',
-    'javascript',
-    'vue'
-  },
-  init_options = {
-    typescript = {
-      serverPath = '/Users/eddie/repositories/clearing-app/node_modules/typescript/lib/tsserverlibrary.js'
-    }
-  },
-}
-
--- npm install -g diagnostic-languageserver
 lspconfig.diagnosticls.setup{
   capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
   filetypes = {
-    'javascript',
-    'typescript',
-    'vue',
     'sh',
     'python',
   },
   init_options = {
     filetypes = {
-      javascript = 'eslint',
-      typescript = 'eslint',
-      vue = 'eslint',
       sh = 'shellcheck',
-      python = 'mypy',
-      python = 'flake8',
+      python = { 'flake8', 'mypy' },
     },
     linters = {
-
-      -- npm install -g eslint_d
-      eslint = {
-        sourceName = 'eslint',
-        command = 'eslint_d',
-        rootPatterns = { 'node_modules' },
-        debounce = 100,
-        args = {
-          '--cache',
-          '--stdin',
-          '--stdin-filename',
-          '%filepath',
-          '--format',
-          'json',
-        },
-        parseJson = {
-          errorsRoot = '[0].messages',
-          line = 'line',
-          endLine = 'endLine',
-          column = 'column',
-          endColumn = 'endColumn',
-          security = 'severity',
-          message = '${message} [${ruleId}]',
-        },
-        securities = {
-          [2] = 'error',
-          [1] = 'warning',
-        }
-      },
-
-      -- install via package manager
       shellcheck = {
         sourceName = 'shellcheck',
         command = 'shellcheck',
@@ -235,19 +219,16 @@ lspconfig.diagnosticls.setup{
         }
       },
 
-      -- python3 -m pip install -U mypy
       mypy = {
         sourceName = 'mypy',
         command = 'mypy',
         debounce = 100,
         args = {
-          '--follow-imports=silent',
-          '--hide-error-codes',
-          '--hide-error-context',
+          '--show-error-context',
+          '--show-column-numbers',
+          '--show-error-codes',
           '--no-color-output',
           '--no-error-summary',
-          '--no-pretty',
-          '--show-column-numbers',
           '%file',
         },
         rootPatterns = {
@@ -256,21 +237,23 @@ lspconfig.diagnosticls.setup{
           'pyproject.toml',
           'setup.cfg'
         },
+        offsetLine = 0,
+        offsetColumn = 0,
+        formatLines = 1,
         formatPattern = {
-          '^.*:(\\d+?):(\\d+?): ([a-z]+?): (.*)$',
+          [[.*:(\d+):(\d+): (\w*): (.*)(\r|\n)*$]],
           {
             line = 1,
             column = 2,
             security = 3,
-            message = 4,
+            message = {
+              '[mypy] ',
+              4
+            }
           },
         },
-        securities = {
-          error = 'error',
-        }
       },
 
-      -- python3 -m pip install -U flake8
       flake8 = {
         sourceName = 'flake8',
         command = 'flake8',
