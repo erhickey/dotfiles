@@ -42,7 +42,7 @@ local on_attach_with_codelens_refresh = function(client, bufnr)
   vim.api.nvim_command('autocmd BufReadPost,CursorMoved,InsertLeave <buffer> lua vim.lsp.codelens.refresh()')
 end
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local lsp_flags = {
   debounce_text_changes = 150,
