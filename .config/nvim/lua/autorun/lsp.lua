@@ -23,7 +23,6 @@ for _, p in pairs(packages) do
   if package:is_installed() then
     package:check_new_version(function(is_new)
       if is_new then
-        package:uninstall()
         package:install()
       end
     end)
