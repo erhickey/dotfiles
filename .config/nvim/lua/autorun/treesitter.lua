@@ -1,4 +1,4 @@
-local rainbow_enabled_list = {"clojure", "fennel", "commonlisp", "query"}
+local rainbow_enabled_list = {'clojure', 'fennel', 'commonlisp', 'query'}
 
 require('nvim-treesitter.configs').setup({
   ensure_installed = 'all',
@@ -27,7 +27,7 @@ require('nvim-treesitter.configs').setup({
         for _, lang in pairs(rainbow_enabled_list) do
           if p==lang then return false end
         end
-        return true
+        return false
       end,
       require('nvim-treesitter.parsers').available_parsers()
     )

@@ -14,7 +14,7 @@ vim.call('plug#begin')
     -- ----------------------
     Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
     Plug 'nvim-treesitter/nvim-treesitter-context' -- sticky context
-    Plug 'JoosepAlviste/nvim-ts-context-commentstring' -- make comment string context aware
+    Plug 'JoosepAlviste/nvim-ts-context-commentstring' -- context aware comment strings
     Plug 'p00f/nvim-ts-rainbow' -- rainbow colored pairs
 
     -- ----------------------
@@ -62,9 +62,14 @@ vim.call('plug#begin')
     Plug 'erhickey/buffer-command-vim'
     Plug 'erhickey/diagline-nvim'
 
-    -- Firenvim - nvim in the browser, requires browser addon
-    -- Firefox: https://addons.mozilla.org/en-US/firefox/addon/firenvim/
-    -- Chrome: https://chrome.google.com/webstore/detail/firenvim/egpjdkipkomnmjhjmdamaniclmdlobbo
+    -- Firenvim - nvim in the browser
+    -- requirements:
+    --  XDG_DATA_HOME environment variable
+    --    linux/macos: $HOME/.local/share
+    --    windows: %APPDATA%
+    --  browser addon:
+    --    Firefox: https://addons.mozilla.org/en-US/firefox/addon/firenvim/
+    --    Chrome: https://chrome.google.com/webstore/detail/firenvim/egpjdkipkomnmjhjmdamaniclmdlobbo
     Plug('glacambre/firenvim', { ['do'] = vim.fn['firenvim#install(0)'] })
 
 vim.call('plug#end')
