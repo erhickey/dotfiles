@@ -196,7 +196,10 @@ lspconfig.diagnosticls.setup{
   init_options = {
     filetypes = {
       sh = 'shellcheck',
-      python = { 'flake8', 'mypy' },
+      python = 'flake8',
+    },
+    formatFiletypes = {
+      python = 'yapf',
     },
     linters = {
       shellcheck = {
@@ -222,6 +225,7 @@ lspconfig.diagnosticls.setup{
         }
       },
 
+      -- too slow, not using it
       mypy = {
         sourceName = 'mypy',
         command = 'mypy',
@@ -291,6 +295,19 @@ lspconfig.diagnosticls.setup{
         }
       },
 
+    },
+    formatters = {
+      yapf = {
+        sourceName = 'yapf',
+        command = 'yapf',
+        rootPatterns = {
+          'requirements.txt',
+          '.style.yapf',
+          'setup.cfg',
+          'pyproject.toml',
+          '.git',
+        },
+      }
     }
   }
 }
