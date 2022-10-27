@@ -7,6 +7,8 @@ local opts = { noremap = true, silent = true }
 
 vim.api.nvim_set_keymap('n', '<leader>o', ':Files!<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>f', ':Rg!<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>a', ':BLines!<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>m', ':Marks!<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>rg', ':Rg! <C-R><C-W><CR>', opts)
 vim.api.nvim_set_keymap('v', '<leader>rg', 'y:Rg! <C-R>0<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>b', ':Buffers<CR>', opts)
