@@ -32,11 +32,7 @@ in
         gnused
         jq
         unstable.neovim
-        nodePackages.diagnostic-languageserver
-        nodePackages.vscode-langservers-extracted
         ripgrep
-        shellcheck
-        sqls
         tmux
         tree
         xz

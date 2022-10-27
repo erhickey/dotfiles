@@ -145,7 +145,12 @@ lspconfig.pyright.setup{
 
 lspconfig.sqls.setup{
   capabilities = capabilities,
-  on_attach = on_attach,
+  on_attach = function(client, bufnr)
+    on_attach()
+    local sqls_km_opts = { expr=false, noremap=true, silent=true }
+    vim.api.nvim_set_keymap('n', '<leader><CR>', "vap:SqlsExecuteQuery<CR>", sqls_km_opts);
+    require('sqls').on_attach(client, bufnr)
+  end,
   flags = lsp_flags,
 }
 
@@ -161,7 +166,7 @@ lspconfig.volar.setup{
   flags = lsp_flags,
   init_options = {
     typescript = {
-      tsdk = '/Users/eddie/repositories/clearing-app/node_modules/typescript/lib/'
+      tsdk = os.getenv('HOME') .. '/.config/typescript_lib/' -- link, must be created
     }
   },
 }

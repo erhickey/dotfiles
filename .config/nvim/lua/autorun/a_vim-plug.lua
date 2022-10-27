@@ -46,7 +46,7 @@ vim.call('plug#begin')
     -- ----------------------
     -- SQL
     -- ----------------------
-    Plug 'tpope/vim-dadbod'
+    Plug 'nanotee/sqls.nvim'
 
     -- ----------------------
     -- miscellaneous
