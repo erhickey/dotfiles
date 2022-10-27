@@ -17,23 +17,17 @@ local packages = {
   'vetur-vls',                  -- npm install -g vls
 }
 
-local function install_update_lsp_clients()
+local function install_lsp_clients()
   local mr = require('mason-registry')
   for _, p in pairs(packages) do
     local package = mr.get_package(p)
-    if package:is_installed() then
-      package:check_new_version(function(is_new)
-        if is_new then
-          package:install()
-        end
-      end)
-    else
+    if not package:is_installed() then
       package:install()
     end
   end
 end
 
-install_update_lsp_clients()
+install_lsp_clients()
 
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
