@@ -72,4 +72,8 @@ set timeout timeoutlen=3000 ttimeoutlen=25
 nnoremap <silent> } :<C-u>execute "keepjumps norm! " . v:count1 . "}"<CR>
 nnoremap <silent> { :<C-u>execute "keepjumps norm! " . v:count1 . "{"<CR>
 
+" copy to system clipboard
+nnoremap Y "+y
+vnoremap Y "+y
+
 filetype plugin indent on
