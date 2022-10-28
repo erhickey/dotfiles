@@ -47,6 +47,7 @@ vim.call('plug#begin')
     -- SQL
     -- ----------------------
     Plug 'nanotee/sqls.nvim'
+    Plug 'erhickey/bigquery-vim'
 
     -- ----------------------
     -- miscellaneous
