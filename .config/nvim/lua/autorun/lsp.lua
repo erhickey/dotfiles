@@ -148,7 +148,7 @@ lspconfig.sqls.setup{
   on_attach = function(client, bufnr)
     on_attach()
     local sqls_km_opts = { expr=false, noremap=true, silent=true }
-    vim.api.nvim_set_keymap('n', '<leader><CR>', "vap:SqlsExecuteQuery<CR>", sqls_km_opts);
+    vim.api.nvim_set_keymap('n', '<leader><CR>', "m'vap:SqlsExecuteQuery<CR>g`'", sqls_km_opts);
     require('sqls').on_attach(client, bufnr)
   end,
   flags = lsp_flags,
