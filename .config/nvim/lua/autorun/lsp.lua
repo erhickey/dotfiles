@@ -159,16 +159,20 @@ lspconfig.tsserver.setup{
   flags = lsp_flags,
 }
 
-lspconfig.volar.setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-  init_options = {
-    typescript = {
-      tsdk = os.getenv('HOME') .. '/.config/typescript_lib/' -- link, must be created
-    }
-  },
-}
+local tsc = vim.fn.trim(vim.fn.system('which tsc'))
+if not (tsc == nil or tsc == '') then
+  local tsdk, _ = tsc:gsub('bin/tsc', 'lib/node_modules/typescript/lib/')
+  lspconfig.volar.setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+    flags = lsp_flags,
+    init_options = {
+      typescript = {
+        tsdk = tsdk
+      }
+    },
+  }
+end
 
 lspconfig.vuels.setup{
   capabilities = capabilities,
