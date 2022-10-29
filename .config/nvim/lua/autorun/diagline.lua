@@ -1,1 +1,0 @@
-require('diagline-nvim').setup()
