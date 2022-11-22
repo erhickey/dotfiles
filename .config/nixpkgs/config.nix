@@ -1,15 +1,13 @@
+# nix-env -iA nixpkgs.upkgs
+
 { pkgs }:
 
-let unstable =
-  import (builtins.fetchGit {
-    name = "nixos-unstable-2022-09-30";
-    url = "https://github.com/nixos/nixpkgs/";
-    ref = "refs/heads/nixos-unstable";
-    rev = "854fdc68881791812eddd33b2fed94b954979a8e";
-  }) {};
+let
+  unstable = import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz) {
+      config = pkgs.config;
+  };
 in
 {
-  # nix-env -iA nixpkgs.upkgs
   packageOverrides = pkgs: with pkgs; {
     upkgs = pkgs.buildEnv {
       name = "user-packages";
