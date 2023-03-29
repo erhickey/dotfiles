@@ -66,7 +66,7 @@ highlight nonascii guifg=#ffffff guibg=#ff0000 ctermfg=white ctermbg=red
 match nonascii "[^\d0-\d127]"
 
 let mapleader="\<Space>"
-set timeout timeoutlen=3000 ttimeoutlen=25
+set timeout timeoutlen=500 ttimeoutlen=25
 
 " move between paragrphs without storing the motion in the jumplist
 nnoremap <silent> } :<C-u>execute "keepjumps norm! " . v:count1 . "}"<CR>
