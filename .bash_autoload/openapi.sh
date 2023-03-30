@@ -4,7 +4,6 @@
 
 function hey_gpt() {
   prompt="$1"
-  source ~/.config/openai/key
   gpt="$( \
     curl -s https://api.openai.com/v1/chat/completions \
     -H "Content-Type: application/json" \
@@ -20,7 +19,6 @@ function hey_gpt() {
 
 function data_gpt() {
   prompt="$1:\n\n$(sed -e 's/"/\\"/g' "$2" | tr '\n' ' ')"
-  source ~/.config/openai/key
   gpt="$( \
     curl -s https://api.openai.com/v1/chat/completions \
     -H "Content-Type: application/json" \
