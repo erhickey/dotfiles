@@ -18,6 +18,7 @@ set mouse=a
 
 syntax enable " syntax highlighting
 set showmatch " highlight syntax matching [{()}]
+autocmd BufWinEnter * if line2byte(line("$") + 1) > 1000000 | syntax clear | set noshowmatch | endif
 
 set tabstop=2 " number of spaces to visually replace tab with
 set expandtab " insert spaces instead of tab

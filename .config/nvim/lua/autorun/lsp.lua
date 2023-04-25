@@ -10,11 +10,12 @@ local packages = {
   'lua-language-server',        -- install via package manager
   'mypy',                       -- python -m pip install -U mypy
   'pyright',                    -- npm install -g pyright
+  'ruff-lsp',                   -- pip install ruff-lsp
+  'rust-analyzer',
   'shellcheck',                 -- install via package manager
   'sqls',                       -- https://github.com/lighttiger2505/sqls/releases
   'typescript-language-server', -- npm install -g typescript typescript-language-server
   'vue-language-server',        -- npm install -g @volar/vue-language-server
-  'vetur-vls',                  -- npm install -g vls
 }
 
 local function install_lsp_clients()
@@ -29,40 +30,59 @@ end
 
 install_lsp_clients()
 
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+local wk = require('which-key')
+wk.register({
+  e = { vim.diagnostic.open_float, 'Open diagnostic float' },
+  q = { vim.diagnostic.setloclist, 'Open diagnostics in quickfix list' },
+}, { prefix = '<leader>' })
+
+wk.register({
+  ['['] = {
+    d = { vim.diagnostic.goto_prev, 'Go to previous error' }
+  },
+  [']'] = {
+    d = { vim.diagnostic.goto_next, 'Go to next error' }
+  }
+})
 
 local on_attach = function(_, bufnr)
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
-
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-
-  vim.keymap.set('n', '<leader>gW', vim.lsp.buf.document_symbol, bufopts)
-  vim.keymap.set('n', '<leader>gw', vim.lsp.buf.workspace_symbol, bufopts)
-
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
 
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('v', '<leader>ca', vim.lsp.buf.range_code_action, bufopts)
+  wk.register({
+    g = {
+      d = { vim.lsp.buf.definition, 'Go to symbol definition' },
+    },
+  }, { buffer = bufnr })
 
-  vim.keymap.set('n', '<A-f>', vim.lsp.buf.formatting, bufopts)
-  vim.keymap.set('v', '<A-f>', vim.lsp.buf.range_formatting, bufopts)
-
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-
-  vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, bufopts)
+  wk.register({
+    l = {
+      name = 'LSP',
+      g = {
+        name = 'Symbols',
+        d = { vim.lsp.buf.definition, 'Go to symbol definition' },
+        D = { vim.lsp.buf.declaration, 'Go to symbol declaration' },
+        r = { vim.lsp.buf.references, 'Show symbol references' },
+        n = { vim.lsp.buf.rename, 'Rename all references to symbol' },
+        i = { vim.lsp.buf.implementation, 'Show symbol implementations' },
+        w = { vim.lsp.buf.document_symbol, 'Show all symbols in current buffer' },
+        W = { vim.lsp.buf.workspace_symbol, 'Show all symbols in workspace' },
+      },
+      k = { vim.lsp.buf.type_definition, 'Show type definition' },
+      c = {
+        name = 'Actions',
+        a = { vim.lsp.buf.code_action, 'Select a code action' },
+        l = { vim.lsp.codelens.run, 'Run code lens' },
+      },
+      w = {
+        name = 'Workspaces',
+        a = { vim.lsp.buf.add_workspace_folder, 'Add workspace folder' },
+        r = { vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder' },
+        l = { function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, 'List workspace folders' },
+      },
+      f = { vim.lsp.buf.format, 'Format code' }
+    }
+  }, { prefix = '<leader>', buffer = bufnr })
 end
 
 local on_attach_with_codelens_refresh = function(client, bufnr)
@@ -118,7 +138,7 @@ lspconfig.jsonls.setup{
   }
 }
 
-lspconfig.sumneko_lua.setup{
+lspconfig.lua_ls.setup{
   settings = {
     Lua = {
       runtime = {
@@ -129,6 +149,7 @@ lspconfig.sumneko_lua.setup{
       },
       workspace = {
         library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
       },
       telemetry = {
         enable = false,
@@ -143,11 +164,25 @@ lspconfig.pyright.setup{
   flags = lsp_flags,
 }
 
+lspconfig.ruff_lsp.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+
+lspconfig.rust_analyzer.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+
 lspconfig.sqls.setup{
   capabilities = capabilities,
   on_attach = function(client, bufnr)
     on_attach()
-    vim.api.nvim_set_keymap('n', '<leader><CR>', "m'vap:SqlsExecuteQuery<CR>g`'", opts);
+    wk.register({
+      ['<cr>'] = { "m'vap:SqlsExecuteQuery<CR>g`'", 'Execute query' }
+    }, { prefix = '<leader>', buffer = bufnr })
     require('sqls').on_attach(client, bufnr)
   end,
   flags = lsp_flags,
@@ -174,19 +209,6 @@ if not (tsc == nil or tsc == '') then
   }
 end
 
-lspconfig.vuels.setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-  init_options = {
-    config = {
-      vetur = {
-        ignoreProjectWarning = true,
-      },
-    },
-  },
-}
-
 lspconfig.diagnosticls.setup{
   capabilities = capabilities,
   on_attach = on_attach,
@@ -198,7 +220,7 @@ lspconfig.diagnosticls.setup{
   init_options = {
     filetypes = {
       sh = 'shellcheck',
-      python = 'flake8',
+      -- python = 'flake8',
     },
     formatFiletypes = {
       python = 'yapf',
@@ -263,6 +285,7 @@ lspconfig.diagnosticls.setup{
         },
       },
 
+      -- use ruff instead
       flake8 = {
         sourceName = 'flake8',
         command = 'flake8',

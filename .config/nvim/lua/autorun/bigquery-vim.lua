@@ -1,6 +1,8 @@
 local function create_keymaps()
-  local opts = { noremap=true, silent=true }
-  vim.api.nvim_set_keymap('n', '<leader><CR>', "m'vap:BQExecute<CR>g`'", opts);
+  local wk = require('which-key')
+  wk.register({
+    ['<cr>'] = { "m'vap:BQExecute<CR>g`'", 'Execute query' }
+  }, { prefix = '<leader>' })
 end
 
 local au_group_name = 'bigquery_vim_aug'

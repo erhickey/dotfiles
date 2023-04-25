@@ -32,27 +32,37 @@ require('gitsigns').setup({
   },
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
+    local wk = require('which-key')
 
-    local function map(mode, l, r, opts)
-      opts = opts or {}
-      opts.buffer = bufnr
-      vim.keymap.set(mode, l, r, opts)
-    end
+    wk.register({
+      ['['] = {
+        c = { function()
+          if vim.wo.diff then return '[c' end
+          vim.schedule(function() gs.prev_hunk() end)
+          return '<Ignore>'
+        end, 'Go to previous hunk' }
+      },
+      [']'] = {
+        c = { function()
+          if vim.wo.diff then return ']c' end
+          vim.schedule(function() gs.next_hunk() end)
+          return '<Ignore>'
+        end, 'Go to next hunk' }
+      }
+    })
 
-    -- Navigation
-    map('n', ']c', function()
-      if vim.wo.diff then return ']c' end
-      vim.schedule(function() gs.next_hunk() end)
-      return '<Ignore>'
-    end, {expr=true})
-
-    map('n', '[c', function()
-      if vim.wo.diff then return '[c' end
-      vim.schedule(function() gs.prev_hunk() end)
-      return '<Ignore>'
-    end, {expr=true})
-
-    map('n', '<leader>cp', gs.preview_hunk)
-    map('n', '<leader>cd', gs.diffthis)
+    wk.register({
+      c = {
+        name = 'gitsigns',
+        p = { gs.preview_hunk, 'Preview hunk' },
+        n = { gs.diffthis, 'Diff hunk' },
+        s = { gs.stage_hunk, 'Stage hunk' },
+        r = { gs.reset_hunk, 'Reset hunk' },
+        u = { gs.undo_stage_hunk, 'Undo stage hunk' },
+        S = { gs.stage_buffer, 'Stage buffer' },
+        R = { gs.reset_buffer, 'Reset buffer' },
+        b = { function() gs.blame_line{full=true} end, 'Blame' },
+      }
+    }, { prefix = '<leader>', buffer = bufnr })
   end
 })
