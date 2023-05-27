@@ -22,7 +22,6 @@ let
       fzf
       gawk
       gcc
-      git
       gnugrep
       gnutar
       gnused
@@ -41,7 +40,6 @@ let
       fd
       fzf
       gcc
-      git
       jq
       unstable.neovim
       nodejs
