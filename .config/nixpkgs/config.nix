@@ -21,12 +21,15 @@ let
       findutils
       fzf
       gawk
+      gcc
       git
       gnugrep
       gnutar
       gnused
       jq
       unstable.neovim
+      nodejs
+      nodePackages.npm
       ripgrep
       tmux
       tree
@@ -37,9 +40,12 @@ let
       bc
       fd
       fzf
+      gcc
       git
       jq
       unstable.neovim
+      nodejs
+      nodePackages.npm
       ripgrep
       tmux
       tree

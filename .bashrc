@@ -20,7 +20,7 @@ export EDITOR="$VISUAL"
 export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
 export HISTSIZE=100000
 export HISTFILESIZE=100000
-export GREP_COLOR='48;5;3;38;5;7'
+export GREP_COLORS='mt=48;5;3;38;5;7'
 
 for file in ~/.bash_autoload/* ; do
   [ -e "$file" ] && source "$file"
