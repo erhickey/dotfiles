@@ -13,7 +13,7 @@ local packages = {
   'ruff-lsp',                   -- pip install ruff-lsp
   'rust-analyzer',
   'shellcheck',                 -- install via package manager
-  'sqls',                       -- https://github.com/lighttiger2505/sqls/releases
+  -- 'sqls',                       -- https://github.com/lighttiger2505/sqls/releases
   'typescript-language-server', -- npm install -g typescript typescript-language-server
   'vue-language-server',        -- npm install -g @volar/vue-language-server
 }
@@ -176,17 +176,17 @@ lspconfig.rust_analyzer.setup{
   flags = lsp_flags,
 }
 
-lspconfig.sqls.setup{
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    on_attach()
-    wk.register({
-      ['<cr>'] = { "m'vap:SqlsExecuteQuery<CR>g`'", 'Execute query' }
-    }, { prefix = '<leader>', buffer = bufnr })
-    require('sqls').on_attach(client, bufnr)
-  end,
-  flags = lsp_flags,
-}
+-- lspconfig.sqls.setup{
+--   capabilities = capabilities,
+--   on_attach = function(client, bufnr)
+--     on_attach()
+--     wk.register({
+--       ['<cr>'] = { "m'vap:SqlsExecuteQuery<CR>g`'", 'Execute query' }
+--     }, { prefix = '<leader>', buffer = bufnr })
+--     require('sqls').on_attach(client, bufnr)
+--   end,
+--   flags = lsp_flags,
+-- }
 
 lspconfig.tsserver.setup{
   capabilities = capabilities,
