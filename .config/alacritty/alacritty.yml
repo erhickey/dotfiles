@@ -18,19 +18,19 @@ scrolling:
 
 font:
   normal:
-    family: LiterationMono Nerd Font Mono
+    family: LiterationMono Nerd Font
     style: Book
 
   bold:
-    family: LiterationMono Nerd Font Mono
+    family: LiterationMono Nerd Font
     style: Bold
 
   italic:
-    family: LiterationMono Nerd Font Mono
+    family: LiterationMono Nerd Font
     style: Italic
 
   bold_italic:
-    family: LiterationMono Nerd Font Mono
+    family: LiterationMono Nerd Font
     style: Bold Italic
 
   size: 12.0
