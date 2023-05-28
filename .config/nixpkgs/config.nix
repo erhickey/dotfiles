@@ -11,7 +11,6 @@ let
   };
   packages = with pkgs; if pkgs.lib.strings.hasInfix "darwin" pkgs.system then
     [
-      alacritty
       bashInteractive
       bat
       bc
@@ -34,7 +33,6 @@ let
       tree
       xz
     ] else [
-      alacritty
       bat
       bc
       fd
