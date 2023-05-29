@@ -28,6 +28,7 @@ let
       unstable.neovim
       nodejs
       nodePackages.npm
+      python3
       ripgrep
       tmux
       tree
@@ -42,6 +43,7 @@ let
       unstable.neovim
       nodejs
       nodePackages.npm
+      python3
       ripgrep
       tmux
       tree

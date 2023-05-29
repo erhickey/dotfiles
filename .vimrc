@@ -7,11 +7,11 @@ if &t_Co > 8
   if has('termguicolors')
     set termguicolors
 
-    " tmux true color fix required by some terminals
+    " true color fix required by some terminals
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-    if &t_Co > 256
+    if $COLORTERM == 'truecolor' || $COLORTERM == '24bit'
       color solarized8_flat
     endif
   endif
