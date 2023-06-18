@@ -11,7 +11,7 @@ local packages = {
   'mypy',                       -- python -m pip install -U mypy
   'pyright',                    -- npm install -g pyright
   'ruff-lsp',                   -- pip install ruff-lsp
-  'rust-analyzer',
+  -- 'rust-analyzer',
   'shellcheck',                 -- install via package manager
   -- 'sqls',                       -- https://github.com/lighttiger2505/sqls/releases
   'typescript-language-server', -- npm install -g typescript typescript-language-server
