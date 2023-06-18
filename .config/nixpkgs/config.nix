@@ -21,6 +21,7 @@ let
       fzf
       gawk
       gcc
+      glow
       gnugrep
       gnutar
       gnused
@@ -39,6 +40,7 @@ let
       fd
       fzf
       gcc
+      glow
       jq
       unstable.neovim
       nodejs
