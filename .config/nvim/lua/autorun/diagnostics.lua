@@ -1,18 +1,18 @@
 local severities = {
   Error = {
-    icon = '',
+    icon = '',
     fg = '#cc241d'
   },
   Warn = {
-    icon = '',
+    icon = '',
     fg = '#d65d0e'
   },
   Hint = {
-    icon = '',
+    icon = '',
     fg = '#458588'
   },
   Info = {
-    icon = '',
+    icon = '',
     fg = '#a89984'
   }
 }
