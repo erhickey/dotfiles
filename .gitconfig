@@ -14,5 +14,3 @@
 [alias]
   difftool = vimdiff
   changes = !git diff --stat $(sh -c 'git merge-base HEAD "${PARENT_BRANCH:=master}"')
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
