@@ -16,13 +16,10 @@ scrolling:
   # Specifying '0' will disable scrolling.
   history: 0
 
-shell:
-  program: tmux
-
 font:
   normal:
     family: LiterationMono Nerd Font
-    style: Book
+    style: Regular
 
   bold:
     family: LiterationMono Nerd Font

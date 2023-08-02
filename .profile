@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 # set path here (instead of in .bashrc) to avoid duplicate paths in non-login shells
 
@@ -10,4 +10,4 @@ export PATH
 
 export MANPATH="$HOME/.nix-profile/share/man:/nix/var/nix/profiles/default/share/man:$MANPATH"
 
-[ -f "$HOME"/.bashrc ] && source "$HOME"/.bashrc
+[ -f "$HOME"/.bashrc ] && . "$HOME"/.bashrc
