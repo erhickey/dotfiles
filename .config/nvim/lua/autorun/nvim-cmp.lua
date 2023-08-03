@@ -38,14 +38,18 @@ cmp.setup.filetype('sql', {
 })
 
 -- Use buffer source for `/` and `?`
-for _,v in pairs({ '/', '?' }) do
-  cmp.setup.cmdline(v, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      { name = 'buffer' }
-    },
-    {
-      { name = 'cmdline' }
-    }
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
   })
-end
+})
