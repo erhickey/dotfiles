@@ -1,19 +1,19 @@
 require('mason').setup()
 
 local packages = {
-  'angular-language-server',    -- npm install -g @angular/language-server
+  -- 'angular-language-server',    -- npm install -g @angular/language-server@[matching major version]
   'diagnostic-languageserver',  -- npm install -g diagnostic-languageserver
   'eslint-lsp',                 -- npm install -g eslint_d
-  'flake8',                     -- python -m pip install -U flake8
+  'flake8',                     -- python -m pip install -U flake8                      (requires venv)
   'haskell-language-server',    -- https://github.com/haskell/haskell-language-server
   'json-lsp',                   -- npm install -g vscode-langservers-extracted
   'lua-language-server',        -- install via package manager
-  'mypy',                       -- python -m pip install -U mypy
+  'mypy',                       -- python -m pip install -U mypy                        (requires venv)
   'pyright',                    -- npm install -g pyright
-  'ruff-lsp',                   -- pip install ruff-lsp
-  -- 'rust-analyzer',
+  'ruff-lsp',                   -- pip install ruff-lsp                                 (requires venv)
+  -- 'rust-analyzer',           --                                                      (install w/ nix instead)
   'shellcheck',                 -- install via package manager
-  -- 'sqls',                       -- https://github.com/lighttiger2505/sqls/releases
+  -- 'sqls',                       -- https://github.com/lighttiger2505/sqls/releases   (depracted)
   'typescript-language-server', -- npm install -g typescript typescript-language-server
   'vue-language-server',        -- npm install -g @volar/vue-language-server
 }
@@ -100,6 +100,7 @@ local lsp_flags = {
 local lspconfig = require('lspconfig')
 
 lspconfig.angularls.setup{
+  root_dir = lspconfig.util.root_pattern('node_modules'),
   capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
