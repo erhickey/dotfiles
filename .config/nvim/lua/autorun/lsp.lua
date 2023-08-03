@@ -9,6 +9,7 @@ local packages = {
   'json-lsp',                   -- npm install -g vscode-langservers-extracted
   'lua-language-server',        -- install via package manager
   'mypy',                       -- python -m pip install -U mypy                        (requires venv)
+  'prettierd',                  -- npm install -g @fsouza/prettierd
   'pyright',                    -- npm install -g pyright
   'ruff-lsp',                   -- pip install ruff-lsp                                 (requires venv)
   -- 'rust-analyzer',           --                                                      (install w/ nix instead)
@@ -80,15 +81,23 @@ local on_attach = function(_, bufnr)
         r = { vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder' },
         l = { function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, 'List workspace folders' },
       },
-      f = { vim.lsp.buf.format, 'Format code' }
     }
   }, { prefix = '<leader>', buffer = bufnr })
 end
 
-local on_attach_with_codelens_refresh = function(client, bufnr)
+local on_attach_format = function(client, bufnr)
+  wk.register({
+    l = {
+      name = 'LSP',
+      f = { function() vim.lsp.buf.format({ async = true, id = client.id }) end, 'Format code' },
+      v = { function() vim.lsp.buf.format({ async = true, id = client.id }) end, 'Format code', mode = 'v' },
+    }
+  }, { prefix = '<leader>', buffer = bufnr })
+end
+
+local on_attach_plus_format = function(client, bufnr)
   on_attach(client, bufnr)
-  -- this is buggy when multiple language servers are attached to the same buffer
-  vim.api.nvim_command('autocmd BufReadPost,CursorMoved,InsertLeave <buffer> lua vim.lsp.codelens.refresh()')
+  on_attach_format(client, bufnr)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -112,9 +121,15 @@ lspconfig.eslint.setup{
   flags = lsp_flags,
 }
 
+local on_attach_haskell = function(client, bufnr)
+  on_attach_plus_format(client, bufnr)
+  -- this is buggy when multiple language servers are attached to the same buffer
+  vim.api.nvim_command('autocmd BufReadPost,CursorMoved,InsertLeave <buffer> lua vim.lsp.codelens.refresh()')
+end
+
 lspconfig.hls.setup{
   capabilities = capabilities,
-  on_attach = on_attach_with_codelens_refresh,
+  on_attach = on_attach_haskell,
   flags = lsp_flags,
   settings = {
     haskell = {
@@ -128,18 +143,14 @@ lspconfig.hls.setup{
 
 lspconfig.jsonls.setup{
   capabilities = capabilities,
-  on_attach = on_attach,
+  on_attach = on_attach_format,
   flags = lsp_flags,
-  commands = {
-    Format = {
-      function()
-        vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line('$'),0})
-      end
-    }
-  }
 }
 
 lspconfig.lua_ls.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+  flags = lsp_flags,
   settings = {
     Lua = {
       runtime = {
@@ -173,7 +184,7 @@ lspconfig.ruff_lsp.setup{
 
 lspconfig.rust_analyzer.setup{
   capabilities = capabilities,
-  on_attach = on_attach,
+  on_attach = on_attach_plus_format,
   flags = lsp_flags,
 }
 
@@ -212,11 +223,14 @@ end
 
 lspconfig.diagnosticls.setup{
   capabilities = capabilities,
-  on_attach = on_attach,
+  on_attach = on_attach_plus_format,
   flags = lsp_flags,
   filetypes = {
     'sh',
     'python',
+    'typescript',
+    'javascript',
+    'html',
   },
   init_options = {
     filetypes = {
@@ -225,6 +239,9 @@ lspconfig.diagnosticls.setup{
     },
     formatFiletypes = {
       python = 'yapf',
+      typescript = 'prettierd',
+      javascript = 'prettierd',
+      html = 'prettierd',
     },
     linters = {
       shellcheck = {
@@ -332,6 +349,23 @@ lspconfig.diagnosticls.setup{
           'setup.cfg',
           'pyproject.toml',
           '.git',
+        },
+      },
+      prettierd = {
+        command = 'prettierd',
+        args = { '%filepath' },
+        rootPatterns = {
+          '.prettierrc',
+          '.prettierrc.json',
+          '.prettierrc.toml',
+          '.prettierrc.json',
+          '.prettierrc.yml',
+          '.prettierrc.yaml',
+          '.prettierrc.json5',
+          '.prettierrc.js',
+          '.prettierrc.cjs',
+          'prettier.config.js',
+          'prettier.config.cjs',
         },
       }
     }

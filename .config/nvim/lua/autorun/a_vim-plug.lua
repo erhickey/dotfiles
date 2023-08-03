@@ -66,7 +66,6 @@ vim.call('plug#begin')
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
     Plug 'folke/which-key.nvim'
-    Plug 'editorconfig/editorconfig-vim'
     Plug 'kevinhwang91/nvim-bqf'          -- better quickfix window
     Plug 'roy2220/easyjump.tmux'
     Plug 'erhickey/buffer-command-vim'
