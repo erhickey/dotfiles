@@ -20,7 +20,6 @@ let
       findutils
       fzf
       gawk
-      gcc
       glow
       gnugrep
       gnutar
@@ -34,12 +33,12 @@ let
       tmux
       tree
       xz
+      zig
     ] else [
       bat
       bc
       fd
       fzf
-      gcc
       glow
       jq
       unstable.neovim
@@ -49,6 +48,7 @@ let
       ripgrep
       tmux
       tree
+      zig
     ];
 in
 {
