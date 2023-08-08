@@ -1,14 +1,10 @@
-# nix-channel --add https://nixos.org/channels/nixos-<latest:23.05> nixpkgs
+# nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
 # nix-channel --update
-#
 # nix-env -iA nixpkgs.upkgs
 
 { pkgs }:
 
 let
-  unstable = import (fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz) {
-      config = pkgs.config;
-  };
   packages = with pkgs; if pkgs.lib.strings.hasInfix "darwin" pkgs.system then
     [
       bashInteractive
@@ -25,7 +21,7 @@ let
       gnutar
       gnused
       jq
-      unstable.neovim
+      neovim
       nodejs
       nodePackages.npm
       python3
@@ -41,7 +37,7 @@ let
       fzf
       glow
       jq
-      unstable.neovim
+      neovim
       nodejs
       nodePackages.npm
       python3
