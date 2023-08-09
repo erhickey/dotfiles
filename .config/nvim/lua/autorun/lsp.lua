@@ -22,10 +22,12 @@ local packages = {
 local function install_lsp_clients()
   local mr = require('mason-registry')
   for _, p in pairs(packages) do
-    local package = mr.get_package(p)
-    if not package:is_installed() then
-      package:install()
-    end
+    mr.refresh(function() -- avoid errors due to registry not being downloaded yet
+      local package = mr.get_package(p)
+      if not package:is_installed() then
+        package:install()
+      end
+    end)
   end
 end
 
