@@ -2,6 +2,10 @@ set background=dark
 color elflord
 
 if &t_Co > 8
+  if empty(glob('~/.vim/colors/solarized.vim'))
+    silent execute '!curl -fLo ~/.vim/colors/solarized.vim --create-dirs https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim'
+  endif
+
   color solarized
 
   if has('termguicolors')
@@ -12,6 +16,10 @@ if &t_Co > 8
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
     if $COLORTERM == 'truecolor' || $COLORTERM == '24bit'
+      if empty(glob('~/.vim/colors/solarized8_flat.vim'))
+        silent execute '!curl -fLo ~/.vim/colors/solarized8_flat.vim --create-dirs https://raw.githubusercontent.com/lifepillar/vim-solarized8/master/colors/solarized8_flat.vim'
+      endif
+
       color solarized8_flat
     endif
   endif
