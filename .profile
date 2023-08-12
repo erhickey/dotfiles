@@ -4,6 +4,7 @@
 
 PATH="$PATH:$HOME/bin"
 PATH="$PATH:$HOME/.cabal/bin"
+PATH="$PATH:$HOME/.npm-packages/bin"
 PATH="/nix/var/nix/profiles/default/bin:$PATH"
 PATH="$HOME/.nix-profile/bin:$PATH"
 export PATH
