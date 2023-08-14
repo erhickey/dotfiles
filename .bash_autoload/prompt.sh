@@ -69,6 +69,7 @@ prompt_command() {
   history -r
 
   set_git_branch
+  autoenv
 }
 
 COLOR_RESET="\\[\\e[0m\\]"
