@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function autoenv() {
+function python_venv() {
   if [[ -n "$VIRTUAL_ENV" ]] ; then
     [[ "$(pwd -P)"/ != "$(dirname "$VIRTUAL_ENV")"/* ]] && deactivate
   fi
@@ -14,4 +14,13 @@ function autoenv() {
       source venv/bin/activate
     fi
   fi
+}
+
+function nix_develop() {
+  :
+}
+
+function autoenv() {
+  python_venv
+  nix_develop
 }

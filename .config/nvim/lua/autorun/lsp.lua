@@ -190,17 +190,28 @@ lspconfig.rust_analyzer.setup{
   flags = lsp_flags,
 }
 
--- lspconfig.sqls.setup{
---   capabilities = capabilities,
---   on_attach = function(client, bufnr)
---     on_attach()
---     wk.register({
---       ['<cr>'] = { "m'vap:SqlsExecuteQuery<CR>g`'", 'Execute query' }
---     }, { prefix = '<leader>', buffer = bufnr })
---     require('sqls').on_attach(client, bufnr)
---   end,
---   flags = lsp_flags,
--- }
+-- custom config to workaround sqls deprecation
+require('lspconfig.configs').sqls_workaround = {
+  default_config = {
+    cmd = { 'sqls' },
+    filetypes = { 'sql', 'mysql' },
+    root_dir = lspconfig.util.root_pattern 'config.yml',
+    single_file_support = true,
+    settings = {},
+  },
+}
+
+lspconfig.sqls_workaround.setup{
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    on_attach()
+    wk.register({
+      ['<cr>'] = { "m'vap:SqlsExecuteQuery<CR>g`'", 'Execute query' }
+    }, { prefix = '<leader>', buffer = bufnr })
+    require('sqls').on_attach(client, bufnr)
+  end,
+  flags = lsp_flags,
+}
 
 lspconfig.tsserver.setup{
   capabilities = capabilities,
