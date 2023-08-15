@@ -14,7 +14,7 @@ local packages = {
   'ruff-lsp',                   -- pip install ruff-lsp                                   (requires venv)
   -- 'rust-analyzer',           --                                                        (install w/ nix instead)
   'shellcheck',                 -- install via package manager
-  -- 'sqls',                       -- https://github.com/lighttiger2505/sqls/releases     (depracted)
+  -- 'sqls',                       -- https://github.com/lighttiger2505/sqls/releases     (depracted, install w/nix or go)
   'typescript-language-server', -- npm install -g typescript typescript-language-server
   'vue-language-server',        -- npm install -g @volar/vue-language-server
 }
