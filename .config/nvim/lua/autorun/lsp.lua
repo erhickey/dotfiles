@@ -14,7 +14,6 @@ local packages = {
   'ruff-lsp',                   -- pip install ruff-lsp                                   (requires venv)
   -- 'rust-analyzer',           --                                                        (install w/ nix instead)
   'shellcheck',                 -- install via package manager
-  -- 'sqls',                       -- https://github.com/lighttiger2505/sqls/releases     (depracted, install w/nix or go)
   'typescript-language-server', -- npm install -g typescript typescript-language-server
   'vue-language-server',        -- npm install -g @volar/vue-language-server
 }
@@ -92,9 +91,15 @@ local on_attach_format = function(client, bufnr)
     l = {
       name = 'LSP',
       f = { function() vim.lsp.buf.format({ async = true, id = client.id }) end, 'Format code' },
-      v = { function() vim.lsp.buf.format({ async = true, id = client.id }) end, 'Format code', mode = 'v' },
     }
   }, { prefix = '<leader>', buffer = bufnr })
+
+  wk.register({
+    l = {
+      name = 'LSP',
+      f = { function() vim.lsp.buf.format({ async = true, id = client.id }) end, 'Format code' },
+    }
+  }, { prefix = '<leader>', buffer = bufnr, mode = 'v' })
 end
 
 local on_attach_plus_format = function(client, bufnr)
@@ -187,29 +192,6 @@ lspconfig.ruff_lsp.setup{
 lspconfig.rust_analyzer.setup{
   capabilities = capabilities,
   on_attach = on_attach_plus_format,
-  flags = lsp_flags,
-}
-
--- custom config to workaround sqls deprecation
-require('lspconfig.configs').sqls_workaround = {
-  default_config = {
-    cmd = { 'sqls' },
-    filetypes = { 'sql', 'mysql' },
-    root_dir = lspconfig.util.root_pattern 'config.yml',
-    single_file_support = true,
-    settings = {},
-  },
-}
-
-lspconfig.sqls_workaround.setup{
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    on_attach()
-    wk.register({
-      ['<cr>'] = { "m'vap:SqlsExecuteQuery<CR>g`'", 'Execute query' }
-    }, { prefix = '<leader>', buffer = bufnr })
-    require('sqls').on_attach(client, bufnr)
-  end,
   flags = lsp_flags,
 }
 

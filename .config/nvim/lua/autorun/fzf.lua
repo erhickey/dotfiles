@@ -4,6 +4,7 @@ vim.g.fzf_preview_window = { 'down:70%', 'ctrl-/' }
 vim.g.fzf_buffers_jump = 1
 
 local wk = require('which-key')
+
 wk.register({
   o = { ':Files!<CR>', 'Open file(s)' },
   f = {
@@ -13,9 +14,16 @@ wk.register({
     a = { ':BLines!<CR>', 'Search open buffers' },
     m = { ':Marks!<CR>', 'Search marks' },
     w = { ':Rg! <C-R><C-W><CR>', 'Search for current word' },
-    v = { 'y:Rg! <C-R>0<CR>', 'Search for current selection', mode = 'v' },
   },
 }, { prefix = '<leader>' })
+
+wk.register({
+  o = { ':Files!<CR>', 'Open file(s)' },
+  f = {
+    name = 'Fuzzy Search',
+    f = { 'y:Rg! <C-R>0<CR>', 'Search for current selection' },
+  },
+}, { prefix = '<leader>', mode = 'v' })
 
 -- modify fzf.vim Rg command to avoid searching file names
 vim.api.nvim_command("command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)")
