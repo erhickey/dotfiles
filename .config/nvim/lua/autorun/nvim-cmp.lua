@@ -20,23 +20,6 @@ cmp.setup{
   }),
 }
 
-cmp.setup.filetype('sql', {
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' },
-  }, {
-    {
-      name = 'buffer',
-      option = {
-        get_bufnrs = function()
-          return vim.api.nvim_list_bufs()
-        end
-      }
-    },
-    { name = 'path' },
-  })
-})
-
 -- Use buffer source for `/` and `?`
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
