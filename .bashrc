@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+[[ $- != *i* ]] && return # abort if shell is non-interactive
+
 [ -f /etc/bashrc ] && source /etc/bashrc
 
 set -o vi
