@@ -17,7 +17,9 @@ function python_venv() {
 }
 
 function nix_develop() {
-  :
+  if [ -f ./flake.nix ] ; then
+    :
+  fi
 }
 
 function autoenv() {

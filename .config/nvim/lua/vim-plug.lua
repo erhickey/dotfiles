@@ -52,13 +52,11 @@ vim.call('plug#begin')
     -- ----------------------
     Plug 'mfussenegger/nvim-dap'
     Plug 'rcarriga/nvim-dap-ui'
-    Plug 'nvim-neotest/neotest'
-    Plug 'nvim-neotest/neotest-python'
+    Plug 'mxsdev/nvim-dap-vscode-js'
 
     -- ----------------------
     -- miscellaneous
     -- ----------------------
-    Plug 'nvim-lua/plenary.nvim'          -- required by neotest
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
