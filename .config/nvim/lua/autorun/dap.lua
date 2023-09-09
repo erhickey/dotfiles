@@ -31,30 +31,98 @@ dap.adapters['pwa-node'] = {
   }
 }
 
-for _, language in pairs({ 'typescript', 'javascript' }) do
+for _, language in pairs({ 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' }) do
   dap.configurations[language] = {
     {
       type = 'pwa-node',
       request = 'attach',
-      name = 'Attach',
-      address = function() return vim.fn.input('Debugger address: ') end,
-      port = function() return vim.fn.input('Debugger port: ') end,
+      name = 'Attach To Debugger',
+      address = function() return require('util').prompt('Debugger address', '127.0.0.1') end,
+      port = function() return require('util').prompt('Debugger port: ', '9229') end,
       cwd = '${workspaceFolder}',
-      localRoot = '${workspaceRoot}/',
-      remoteRoot = '${workspaceRoot}/',
+      continueOnAttach = true,
+      sourceMpas = false,
+      skipFiles = {
+        '<node_internals>/**',
+        '**/node_modules/**'
+      },
+    },
+    {
+      type = 'pwa-node',
+      request = 'attach',
+      name = 'Attach To Program',
+      processId = require('dap.utils').pick_process,
+      cwd = '${workspaceFolder}',
+      continueOnAttach = true,
+      sourceMpas = false,
+      skipFiles = {
+        '<node_internals>/**',
+        '**/node_modules/**'
+      },
+    },
+    {
+      type = 'pwa-node',
+      request = 'launch',
+      name = 'Launch Current File',
+      cwd = '${workspaceFolder}',
+      args = {'${file}'},
+      sourceMaps = false,
+      protocol = 'inspector',
       continueOnAttach = true,
       skipFiles = {
+        '<node_internals>/**',
         '**/node_modules/**'
       }
     },
+    {
+      type = 'pwa-node',
+      request = 'launch',
+      name = 'Launch Current File With Jest',
+      cwd = '${workspaceFolder}',
+      runtimeArgs = { '${workspaceFolder}/node_modules/.bin/jest' },
+      runtimeExecutable = 'node',
+      args = { '${file}', '--coverage', 'false' },
+      rootPath = '${workspaceFolder}',
+      sourceMaps = true,
+      console = 'integratedTerminal',
+      internalConsoleOptions = 'neverOpen',
+      skipFiles = {
+        '<node_internals>/**',
+        '**/node_modules/**'
+      }
+    }
   }
 end
+
+dap.adapters.python = {
+  type = 'executable',
+  command = 'python3',
+  args = { '-m', 'debugpy.adapter' }
+}
+
+dap.configurations.python = {
+  {
+    type = 'python',
+    request = 'launch',
+    name = 'Launch Current File',
+    program = '${file}',
+    console = 'integratedTerminal',
+  },
+  {
+    type = 'python',
+    request = 'launch',
+    name = 'Pytest Current File',
+    module = 'pytest',
+    args = { '${file}' },
+    console = 'integratedTerminal',
+  }
+}
 
 local wk = require('which-key')
 wk.register({
   d = {
     name = 'Debug',
-    c = { "<Cmd>lua require'dap'.continue()<CR>", 'Continue' },
+    c = { "<Cmd>lua require'dap'.continue()<CR>", 'Start/Continue' },
     j = { "<Cmd>lua require'dap'.step_over()<CR>", 'Step Over' },
     h = { "<Cmd>lua require'dap'.step_into()<CR>", 'Step Into' },
     k = { "<Cmd>lua require'dap'.step_out()<CR>", 'Step Out' },
