@@ -1,8 +1,5 @@
 #!/usr/bin/env sh
 
-# set path here (instead of in .bashrc) to avoid duplicate paths in non-login shells
-
-PATH="$PATH:$HOME/bin"
 PATH="$PATH:$HOME/.cabal/bin"
 PATH="$PATH:$HOME/.npm-packages/bin"
 PATH="/nix/var/nix/profiles/default/bin:$PATH"

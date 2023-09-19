@@ -15,8 +15,7 @@ alias ssh='ssh -o ServerAliveInterval=240'
 command -v vim &> /dev/null && alias vi='vim'
 command -v nvim &> /dev/null && alias vi='nvim'
 
-SHELL="$(which bash)"
-export SHELL
+export SHELL="$(which bash)"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "

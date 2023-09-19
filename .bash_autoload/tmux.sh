@@ -13,8 +13,3 @@ function hoogle_tmux() {
 function replace_spaces() {
   printf '%s' "$1" | tr ' ' '+'
 }
-
-function nvim_autoload_env() {
-  autoenv
-  nvim -c 'Files!'
-}
