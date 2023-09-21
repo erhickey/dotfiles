@@ -1,0 +1,1 @@
+/home/eddie/repositories/void-install/conf/hp-laptop/links/.xinitrc

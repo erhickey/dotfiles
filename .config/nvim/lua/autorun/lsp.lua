@@ -143,7 +143,7 @@ lspconfig.hls.setup{
       hLintOn = true,
       maxNumberOfProblems = 30,
       formatOnImportOn = true,
-      formattingProvider = 'brittany'
+      formattingProvider = 'floskell'
     }
   }
 }
