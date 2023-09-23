@@ -51,6 +51,7 @@ set sidescrolloff=20 " minimum number of columns to keep to left/right of cursor
 set visualbell " visual bell instead of beep
 
 set wildmenu " visual autocomplete for command menu
+set wildoptions="" " remove pum (popup menu) default in neovim
 set laststatus=2 " always show status bar
 
 set shell=bash

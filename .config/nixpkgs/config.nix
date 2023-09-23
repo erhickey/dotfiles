@@ -47,6 +47,7 @@ let
       ghc
       haskellPackages.haskell-language-server
       xmonad-with-packages
+      tealdeer
       zig
       (st.overrideAttrs (oldAttrs: rec {
         # ligatures dependency

@@ -7,10 +7,10 @@ local wk = require('which-key')
 
 wk.register({
   o = { ':Files!<CR>', 'Open file(s)' },
+  b = { ':Buffers<CR>', 'Open buffer' },
   f = {
     name = 'Fuzzy Search',
     f = { ':Rg!<CR>', 'Search project (ripgrep)' },
-    b = { ':Buffers<CR>', 'Search current buffer' },
     a = { ':BLines!<CR>', 'Search open buffers' },
     m = { ':Marks!<CR>', 'Search marks' },
     w = { ':Rg! <C-R><C-W><CR>', 'Search for current word' },
@@ -19,6 +19,7 @@ wk.register({
 
 wk.register({
   o = { ':Files!<CR>', 'Open file(s)' },
+  b = { ':Buffers<CR>', 'Open buffer' },
   f = {
     name = 'Fuzzy Search',
     f = { 'y:Rg! <C-R>0<CR>', 'Search for current selection' },
