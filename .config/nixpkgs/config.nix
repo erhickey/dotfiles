@@ -48,7 +48,12 @@ let
       haskellPackages.haskell-language-server
       xmonad-with-packages
       tealdeer
+      xorg.xrandr
+      gnupg
+      pinentry-curses  # gnupg dep
       zig
+      neomutt
+      isync
       (st.overrideAttrs (oldAttrs: rec {
         # ligatures dependency
         # buildInputs = oldAttrs.buildInputs ++ [ harfbuzz ];

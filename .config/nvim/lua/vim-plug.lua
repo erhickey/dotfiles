@@ -25,8 +25,8 @@ vim.call('plug#begin')
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-path'
     Plug 'hrsh7th/cmp-vsnip'
-    Plug 'hrsh7th/vim-vsnip'      -- snippet engine is required by nvim-cmp
-    Plug 'windwp/nvim-autopairs'  -- required to add parens after nvim-cmp function completion
+    Plug 'hrsh7th/vim-vsnip'      -- a snippet engine is required by nvim-cmp
+    Plug 'windwp/nvim-autopairs'  -- add parens after function completion
 
     -- ----------------------
     -- git
@@ -38,8 +38,8 @@ vim.call('plug#begin')
     -- markup language
     -- ----------------------
     Plug 'mattn/emmet-vim'
-    Plug 'alvan/vim-closetag'       -- auto close html tags
-    Plug 'AndrewRadev/tagalong.vim' -- auto-update matching html/xml tag
+    Plug 'alvan/vim-closetag'       -- auto-close tags
+    Plug 'AndrewRadev/tagalong.vim' -- auto-update matching tag
 
     -- ----------------------
     -- SQL
@@ -63,7 +63,6 @@ vim.call('plug#begin')
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
     Plug 'folke/which-key.nvim'
-    Plug 'kevinhwang91/nvim-bqf'          -- better quickfix window
     Plug 'roy2220/easyjump.tmux'
     Plug 'erhickey/buffer-command-vim'
     Plug 'erhickey/diagline-nvim'

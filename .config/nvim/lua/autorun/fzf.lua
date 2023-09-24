@@ -12,6 +12,7 @@ wk.register({
     name = 'Fuzzy Search',
     f = { ':Rg!<CR>', 'Search project (ripgrep)' },
     a = { ':BLines!<CR>', 'Search open buffers' },
+    j = { ':Jumps!<CR>', 'Search jumps' },
     m = { ':Marks!<CR>', 'Search marks' },
     w = { ':Rg! <C-R><C-W><CR>', 'Search for current word' },
   },
