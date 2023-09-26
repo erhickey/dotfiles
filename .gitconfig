@@ -1,3 +1,5 @@
+[init]
+  defaultbranch = main
 [pull]
   ff = only
 [merge]
