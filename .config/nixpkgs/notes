@@ -1,3 +1,0 @@
-export TERMINFO_DIRS=/nix/store/nzws35n2yr3a81v7kf0ya9ff1qjjggc5-st-0.9/share/terminfo
-
-or link in .terminfo
