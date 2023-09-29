@@ -63,7 +63,6 @@ vim.call('plug#begin')
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
     Plug 'folke/which-key.nvim'
-    Plug 'roy2220/easyjump.tmux'
     Plug 'erhickey/buffer-command-vim'
     Plug 'erhickey/diagline-nvim'
 
