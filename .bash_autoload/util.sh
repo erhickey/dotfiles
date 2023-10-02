@@ -32,7 +32,7 @@ function colors() {
 
 function lsg() {
   dir=.
-  [ $# -ge 0 ] && dir="$1"
+  [ $# -gt 0 ] && dir="$1"
 
   case "$(uname -a)" in
 
