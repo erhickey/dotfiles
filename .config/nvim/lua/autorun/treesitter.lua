@@ -7,7 +7,7 @@ require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true,
     disable = function()
-        return vim.fn.line2byte(vim.fn.line("$") + 1) > 1000000
+      return vim.fn.line2byte(vim.fn.line("$") + 1) > 100000
     end,
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -16,7 +16,10 @@ require('nvim-treesitter.configs').setup({
     additional_vim_regex_highlighting = false,
   },
   indent = {
-    enable = true
+    enable = true,
+    disable = function()
+      return vim.fn.line2byte(vim.fn.line("$") + 1) > 100000
+    end,
   },
   context_commentstring = {
     enable = true,
