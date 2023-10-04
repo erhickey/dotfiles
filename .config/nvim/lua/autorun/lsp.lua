@@ -7,7 +7,7 @@ local packages = {
   'flake8',                     -- python -m pip install -U flake8                        (requires venv)
   -- 'haskell-language-server',    -- https://github.com/haskell/haskell-language-server  (install w/nix instead)
   'json-lsp',                   -- npm install -g vscode-langservers-extracted
-  'lua-language-server',        -- install via package manager
+  -- 'lua-language-server',        -- install via package manager
   'mypy',                       -- python -m pip install -U mypy                          (requires venv)
   'prettierd',                  -- npm install -g @fsouza/prettierd
   'pyright',                    -- npm install -g pyright
