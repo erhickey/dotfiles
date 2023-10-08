@@ -9,6 +9,7 @@ local packages = {
   'json-lsp',                   -- npm install -g vscode-langservers-extracted
   -- 'lua-language-server',        -- install via package manager
   'mypy',                       -- python -m pip install -U mypy                          (requires venv)
+  -- 'nil'                      -- nix ls, install via nix
   'prettierd',                  -- npm install -g @fsouza/prettierd
   'pyright',                    -- npm install -g pyright
   'ruff-lsp',                   -- pip install ruff-lsp                                   (requires venv)
@@ -175,6 +176,12 @@ lspconfig.lua_ls.setup{
       },
     },
   },
+}
+
+lspconfig.nil_ls.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+  flags = lsp_flags,
 }
 
 lspconfig.pyright.setup{
