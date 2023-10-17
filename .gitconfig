@@ -1,3 +1,6 @@
+[user]
+  name = Eddie Hickey
+  useConfigOnly = true
 [init]
   defaultbranch = main
 [pull]
