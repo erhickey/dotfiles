@@ -2,7 +2,7 @@
 
 [[ $- != *i* ]] && return # abort if shell is non-interactive
 
-[ -f /etc/bashrc ] && source /etc/bashrc
+[ -e /etc/bashrc ] && source /etc/bashrc
 
 set -o vi
 shopt -sq checkwinsize # auto update LINES and COLUMNS

@@ -8,4 +8,8 @@ export PATH
 
 export MANPATH="$HOME/.nix-profile/share/man:/nix/var/nix/profiles/default/share/man:$MANPATH"
 
-[ -f "$HOME"/.bashrc ] && . "$HOME"/.bashrc
+[ -e "$HOME"/.bashrc ] && . "$HOME"/.bashrc
+
+if [ -z "$DISPLAY" ] && [ -e "$HOME"/.xinitrc ] && [ "$(fgconsole 2> /dev/null || printf "0")" -eq 1 ] ; then
+  startx
+fi
