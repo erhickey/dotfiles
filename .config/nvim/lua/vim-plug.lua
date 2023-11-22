@@ -7,6 +7,7 @@ vim.call('plug#begin')
     -- ----------------------
     Plug 'neovim/nvim-lspconfig'
     Plug 'williamboman/mason.nvim'
+    Plug 'pmizio/typescript-tools.nvim'
     Plug 'erhickey/sig-window-nvim'
 
     -- ----------------------
@@ -15,6 +16,7 @@ vim.call('plug#begin')
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'nvim-treesitter/nvim-treesitter-context'      -- sticky context
     Plug 'JoosepAlviste/nvim-ts-context-commentstring'  -- context aware comment strings
+    Plug 'hiphish/rainbow-delimiters.nvim'
 
     -- ----------------------
     -- nvim-cmp
@@ -63,6 +65,7 @@ vim.call('plug#begin')
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
     Plug 'folke/which-key.nvim'
+    Plug 'nvim-lua/plenary.nvim' -- typescript-tools dep
     Plug 'erhickey/buffer-command-vim'
     Plug 'erhickey/diagline-nvim'
 

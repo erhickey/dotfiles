@@ -21,7 +21,6 @@ require('nvim-treesitter.configs').setup({
       return vim.fn.line2byte(vim.fn.line("$") + 1) > 100000
     end,
   },
-  context_commentstring = {
-    enable = true,
-  },
 })
+
+require('treesitter-context').setup()

@@ -2,6 +2,7 @@ require('mason').setup()
 
 local packages = {
   -- 'angular-language-server',    -- npm install -g @angular/language-server@[matching major version]
+  -- 'clojure-lsp',                -- install via package manager
   'diagnostic-languageserver',  -- npm install -g diagnostic-languageserver
   'eslint-lsp',                 -- npm install -g eslint_d
   'flake8',                     -- python -m pip install -U flake8                        (requires venv)
@@ -123,6 +124,12 @@ lspconfig.angularls.setup{
   flags = lsp_flags,
 }
 
+lspconfig.clojure_lsp.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+
 lspconfig.eslint.setup{
   capabilities = capabilities,
   on_attach = on_attach,
@@ -202,7 +209,7 @@ lspconfig.rust_analyzer.setup{
   flags = lsp_flags,
 }
 
-lspconfig.tsserver.setup{
+require("typescript-tools").setup {
   capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
