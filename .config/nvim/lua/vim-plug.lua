@@ -16,7 +16,6 @@ vim.call('plug#begin')
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'nvim-treesitter/nvim-treesitter-context'      -- sticky context
     Plug 'JoosepAlviste/nvim-ts-context-commentstring'  -- context aware comment strings
-    Plug 'hiphish/rainbow-delimiters.nvim'
 
     -- ----------------------
     -- nvim-cmp
