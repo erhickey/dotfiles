@@ -209,7 +209,7 @@ lspconfig.rust_analyzer.setup{
   flags = lsp_flags,
 }
 
-require("typescript-tools").setup {
+lspconfig.tsserver.setup {
   capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
