@@ -6,10 +6,13 @@
 [pull]
   ff = only
 [merge]
-  conflictStyle = diff3
+  conflictStyle = zdiff3
 [core]
   editor = vim
+  pager = delta
 [diff]
+  algorithm = histogram
+  colorMoved = default
   tool = vimdiff
 [difftool]
   prompt = false
@@ -21,3 +24,5 @@
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
+[delta]
+  diff-so-fancy = true
