@@ -45,6 +45,7 @@ vim.call('plug#begin')
     -- SQL
     -- ----------------------
     Plug 'tpope/vim-dadbod'
+    Plug('napisani/nvim-dadbod-bg', { ['do'] = './install.sh' })
     Plug 'erhickey/bigquery-vim'
 
     -- ----------------------

@@ -2,7 +2,7 @@ local adapters = {
   {
     name = 'javascript',
     filename= 'js-debug-dap.tar.gz',
-    url = 'https://github.com/microsoft/vscode-js-debug/releases/download/v1.81.0/js-debug-dap-v1.81.0.tar.gz'
+    url = 'https://github.com/microsoft/vscode-js-debug/releases/download/v1.88.0/js-debug-dap-v1.88.0.tar.gz'
   },
 }
 
@@ -40,11 +40,11 @@ for _, language in pairs({ 'typescript', 'javascript', 'typescriptreact', 'javas
       address = function() return require('util').prompt('Debugger address', '127.0.0.1') end,
       port = function() return require('util').prompt('Debugger port: ', '9229') end,
       cwd = '${workspaceFolder}',
-      continueOnAttach = true,
-      sourceMpas = false,
+      continueOnAttach = false,
+      sourceMaps = true,
       skipFiles = {
         '<node_internals>/**',
-        '**/node_modules/**'
+        '**/node_modules/**',
       },
     },
     {
@@ -53,8 +53,8 @@ for _, language in pairs({ 'typescript', 'javascript', 'typescriptreact', 'javas
       name = 'Attach To Program',
       processId = require('dap.utils').pick_process,
       cwd = '${workspaceFolder}',
-      continueOnAttach = true,
-      sourceMpas = false,
+      continueOnAttach = false,
+      sourceMaps = true,
       skipFiles = {
         '<node_internals>/**',
         '**/node_modules/**'
@@ -66,9 +66,9 @@ for _, language in pairs({ 'typescript', 'javascript', 'typescriptreact', 'javas
       name = 'Launch Current File',
       cwd = '${workspaceFolder}',
       args = {'${file}'},
-      sourceMaps = false,
+      sourceMaps = true,
       protocol = 'inspector',
-      continueOnAttach = true,
+      continueOnAttach = false,
       skipFiles = {
         '<node_internals>/**',
         '**/node_modules/**'
