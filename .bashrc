@@ -11,11 +11,12 @@ shopt -sq histappend
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias sh='bash'
-alias ssh='ssh -o ServerAliveInterval=240'
+alias ssh='ssh -o ServerAliveInterval=240 -o SendEnv=COLORTERM'
 command -v vim &> /dev/null && alias vi='vim'
 command -v nvim &> /dev/null && alias vi='nvim'
 
-export SHELL="$(which bash)"
+shell="$(which bash)"
+export SHELL="$shell"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
