@@ -13,7 +13,7 @@ local packages = {
   -- 'nil'                      -- nix ls, install via nix
   'prettierd',                  -- npm install -g @fsouza/prettierd
   'pyright',                    -- npm install -g pyright
-  'ruff-lsp',                   -- pip install ruff-lsp                                   (requires venv)
+  'ruff',                       -- pip install ruff                                       (requires venv)
   -- 'rust-analyzer',           --                                                        (install w/ nix instead)
   'shellcheck',                 -- install via package manager
   'typescript-language-server', -- npm install -g typescript typescript-language-server
@@ -35,73 +35,63 @@ end
 install_lsp_clients()
 
 local wk = require('which-key')
-wk.register({
-  e = { vim.diagnostic.open_float, 'Open diagnostic float' },
-  q = { vim.diagnostic.setloclist, 'Open diagnostics in quickfix list' },
-}, { prefix = '<leader>' })
 
-wk.register({
-  ['['] = {
-    d = { vim.diagnostic.goto_prev, 'Go to previous error' }
-  },
-  [']'] = {
-    d = { vim.diagnostic.goto_next, 'Go to next error' }
-  }
+wk.add({
+  { "<leader>e", vim.diagnostic.open_float, desc = "Open diagnostic float" },
+  { "<leader>q", vim.diagnostic.setloclist, desc = "Open diagnostics in quickfix list" },
+  { "[d", vim.diagnostic.goto_prev, desc = "Go to previous error" },
+  { "]d", vim.diagnostic.goto_next, desc = "Go to next error" }
 })
 
 local on_attach = function(_, bufnr)
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
 
-  wk.register({
-    g = {
-      d = { vim.lsp.buf.definition, 'Go to symbol definition' },
-    },
-  }, { buffer = bufnr })
+  wk.add({
+    { "gd", vim.lsp.buf.definition, buffer = bufnr, desc = "Go to symbol definition" },
 
-  wk.register({
-    l = {
-      name = 'LSP',
-      g = {
-        name = 'Symbols',
-        d = { vim.lsp.buf.definition, 'Go to symbol definition' },
-        D = { vim.lsp.buf.declaration, 'Go to symbol declaration' },
-        r = { vim.lsp.buf.references, 'Show symbol references' },
-        n = { vim.lsp.buf.rename, 'Rename all references to symbol' },
-        i = { vim.lsp.buf.implementation, 'Show symbol implementations' },
-        w = { vim.lsp.buf.document_symbol, 'Show all symbols in current buffer' },
-        W = { vim.lsp.buf.workspace_symbol, 'Show all symbols in workspace' },
-      },
-      k = { vim.lsp.buf.type_definition, 'Show type definition' },
-      c = {
-        name = 'Actions',
-        a = { vim.lsp.buf.code_action, 'Select a code action' },
-        l = { vim.lsp.codelens.run, 'Run code lens' },
-      },
-      w = {
-        name = 'Workspaces',
-        a = { vim.lsp.buf.add_workspace_folder, 'Add workspace folder' },
-        r = { vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder' },
-        l = { function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, 'List workspace folders' },
-      },
-    }
-  }, { prefix = '<leader>', buffer = bufnr })
+  })
+
+  wk.add({
+    { "<leader>l", buffer = bufnr, group = "LSP" },
+    { "<leader>lc", buffer = bufnr, group = "Actions" },
+    { "<leader>lca", vim.lsp.buf.code_action, buffer = bufnr, desc = "Select a code action" },
+    { "<leader>lcl", vim.lsp.codelens.run, buffer = bufnr, desc = "Run code lens" },
+    { "<leader>lg", buffer = bufnr, group = "Symbols" },
+    { "<leader>lgD", vim.lsp.buf.declaration, buffer = bufnr, desc = "Go to symbol declaration" },
+    { "<leader>lgW", vim.lsp.buf.workspace_symbol, buffer = bufnr, desc = "Show all symbols in workspace" },
+    { "<leader>lgd", vim.lsp.buf.definition, buffer = bufnr, desc = "Go to symbol definition" },
+    { "<leader>lgi", vim.lsp.buf.implementation, buffer = bufnr, desc = "Show symbol implementations" },
+    { "<leader>lgn", vim.lsp.buf.rename, buffer = bufnr, desc = "Rename all references to symbol" },
+    { "<leader>lgr", vim.lsp.buf.references, buffer = bufnr, desc = "Show symbol references" },
+    { "<leader>lgw", vim.lsp.buf.document_symbol, buffer = bufnr, desc = "Show all symbols in current buffer" },
+    { "<leader>lk", vim.lsp.buf.type_defintion, buffer = bufnr, desc = "Show type definition" },
+    { "<leader>lw", buffer = bufnr, group = "Workspaces" },
+    { "<leader>lwa", vim.lsp.buf.add_workspace_folder, buffer = bufnr, desc = "Add workspace folder" },
+    {
+      "<leader>lwl",
+      function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+      end,
+      buffer = bufnr,
+      desc = "List workspace folders"
+    },
+    { "<leader>lwr", vim.lsp.buf.remove_workspace_folder, buffer = bufnr, desc = "Remove workspace folder" }
+  })
 end
 
 local on_attach_format = function(client, bufnr)
-  wk.register({
-    l = {
-      name = 'LSP',
-      f = { function() vim.lsp.buf.format({ async = true, id = client.id }) end, 'Format code' },
+  wk.add({
+    { "<leader>l", buffer = 1, group = "LSP" },
+    {
+      "<leader>lf",
+      function()
+        vim.lsp.buf.format({ async = true, id = client.id })
+      end,
+      buffer = bufnr,
+      desc = "Format code"
     }
-  }, { prefix = '<leader>', buffer = bufnr })
-
-  wk.register({
-    l = {
-      name = 'LSP',
-      f = { function() vim.lsp.buf.format({ async = true, id = client.id }) end, 'Format code' },
-    }
-  }, { prefix = '<leader>', buffer = bufnr, mode = 'v' })
+  })
 end
 
 local on_attach_plus_format = function(client, bufnr)
@@ -197,7 +187,7 @@ lspconfig.pyright.setup{
   flags = lsp_flags,
 }
 
-lspconfig.ruff_lsp.setup{
+lspconfig.ruff.setup{
   capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
@@ -209,7 +199,7 @@ lspconfig.rust_analyzer.setup{
   flags = lsp_flags,
 }
 
-lspconfig.tsserver.setup {
+lspconfig.ts_ls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,

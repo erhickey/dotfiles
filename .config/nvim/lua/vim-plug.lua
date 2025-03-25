@@ -12,7 +12,7 @@ vim.call('plug#begin')
     -- ----------------------
     -- treesitter
     -- ----------------------
-    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
     Plug 'nvim-treesitter/nvim-treesitter-context'      -- sticky context
     Plug 'JoosepAlviste/nvim-ts-context-commentstring'  -- context aware comment strings
 
@@ -47,13 +47,6 @@ vim.call('plug#begin')
     Plug 'tpope/vim-dadbod'
     Plug('napisani/nvim-dadbod-bg', { ['do'] = './install.sh' })
     Plug 'erhickey/bigquery-vim'
-
-    -- ----------------------
-    -- DAP
-    -- ----------------------
-    Plug 'mfussenegger/nvim-dap'
-    Plug 'rcarriga/nvim-dap-ui'
-    Plug 'mxsdev/nvim-dap-vscode-js'
 
     -- ----------------------
     -- miscellaneous

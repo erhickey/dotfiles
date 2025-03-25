@@ -1,8 +1,7 @@
 local function create_keymaps()
-  local wk = require('which-key')
-  wk.register({
-    ['<cr>'] = { "m'vap:BQExecute<CR>g`'", 'Execute query' }
-  }, { prefix = '<leader>' })
+  require('which-key').add({
+    { "<leader><cr>", "m'vap:BQExecute<CR>g`'", desc = "Execute query" },
+  })
 end
 
 local au_group_name = 'bigquery_vim_aug'

@@ -1,12 +1,7 @@
 -- default db config:
 --  :help dadbod-variables
 
-local wk = require('which-key')
-
-wk.register({
-  ['<cr>'] = { "m'vap:DB<CR>g`'", 'Execute query' },
-}, { prefix = '<leader>' })
-
-wk.register({
-  ['<cr>'] = { ":DB<CR>", 'Execute query' },
-}, { prefix = '<leader>', mode = 'v' })
+require('which-key').add({
+  { "<leader><cr>", "m'vap:DB<CR>g`'", desc = "Execute query", mode = "n" },
+  { "<leader><cr>", ":DB<CR>", desc = "Execute query", mode = "v" }
+})
