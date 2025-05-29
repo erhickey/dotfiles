@@ -96,7 +96,7 @@ BG_WHITE="\\[\\e[48;5;7m\\]"
 BG_ORANGE="\\[\\e[48;5;9m\\]"
 BG_BLACK="\\[\\e[48;5;16m\\]"
 
-([ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]) && PS1_HOST="\\u@\\h "
+{ [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; } && PS1_HOST="\\u@\\h "
 
 PS1="$BOLD_TEXT$FG_BLUE\\w$FG_YELLOW\$PS1_GIT_BRANCH$FG_RED\$PS1_ERROR_PROMPT\\n$FG_GREEN$PS1_HOST$FG_ORANGE\$COMMAND_DURATION_DISPLAY$FG_CYAN "
 
