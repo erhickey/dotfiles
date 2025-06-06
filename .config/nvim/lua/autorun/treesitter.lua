@@ -1,4 +1,4 @@
-disableOnLargeFiles = function()
+local disableOnLargeFiles = function()
   return vim.fn.line2byte(vim.fn.line("$") + 1) > 100000
 end
 

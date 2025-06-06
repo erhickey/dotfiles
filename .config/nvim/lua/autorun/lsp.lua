@@ -39,8 +39,20 @@ local wk = require('which-key')
 wk.add({
   { "<leader>e", vim.diagnostic.open_float, desc = "Open diagnostic float" },
   { "<leader>q", vim.diagnostic.setloclist, desc = "Open diagnostics in quickfix list" },
-  { "[d", vim.diagnostic.goto_prev, desc = "Go to previous error" },
-  { "]d", vim.diagnostic.goto_next, desc = "Go to next error" }
+  {
+    "[d",
+    function()
+      vim.diagnostic.jump({ count = -1, float = true })
+    end,
+    desc = "Go to previous error"
+  },
+  {
+    "]d",
+    function()
+      vim.diagnostic.jump({ count = 1, float = true })
+    end,
+    desc = "Go to next error"
+  }
 })
 
 local on_attach = function(_, bufnr)

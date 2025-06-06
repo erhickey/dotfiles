@@ -1,36 +1,40 @@
 local severities = {
-  Error = {
+  [vim.diagnostic.severity.ERROR] = {
+    hlname = 'Error',
     icon = '',
     fg = '#cc241d'
   },
-  Warn = {
+  [vim.diagnostic.severity.WARN] = {
+    hlname = 'Warn',
     icon = '',
     fg = '#d65d0e'
   },
-  Hint = {
+  [vim.diagnostic.severity.HINT] = {
+    hlname = 'Hint',
     icon = '',
     fg = '#458588'
   },
-  Info = {
+  [vim.diagnostic.severity.INFO] = {
+    hlname = 'Info',
     icon = '',
     fg = '#a89984'
   }
 }
 
-for type, config in pairs(severities) do
-  vim.cmd('highlight clear Diagnostic' .. type)
-  vim.cmd('highlight Diagnostic' .. type .. ' guifg=' .. config.fg)
+local signs = {
+  text = {},
+  numhl = {},
+}
 
-  vim.fn.sign_define(
-    'DiagnosticSign' .. type,
-    {
-      text = config.icon,
-      texthl = 'Diagnostic' .. type,
-      numhl = 'Diagnostic' .. type,
-    })
+for severity, config in pairs(severities) do
+  vim.cmd('highlight Diagnostic' .. config.hlname .. ' guifg=' .. config.fg)
+
+  signs.text[severity] = config.icon
+  signs.numhl[severity] = 'Diagnostic' .. config.hlname
 end
 
 vim.diagnostic.config({
+  signs = signs,
   severity_sort = true,
   float = {
     border = 'rounded',
@@ -40,4 +44,4 @@ vim.diagnostic.config({
   },
 })
 
-require('diagline-nvim').setup()
+require('diagline-nvim').setup({ signs = signs })
