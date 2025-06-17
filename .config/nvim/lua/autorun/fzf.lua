@@ -9,7 +9,7 @@ vim.api.nvim_command("command! -bang -nargs=* Rg call fzf#vim#grep('rg --column 
 require('which-key').add({
   { "<leader>b", ":Buffers<CR>", desc = "Open buffer" },
   { "<leader>f", group = "Fuzzy Search" },
-  { "<leader>fa", ":BLines!<CR>", desc = "Search open buffers" },
+  { "<leader>fb", ":Lines!<CR>", desc = "Search open buffers" },
   { "<leader>ff", ":Rg!<CR>", desc = "Search project (ripgrep)", mode = "n" },
   { "<leader>fj", ":Jumps!<CR>", desc = "Search jumps" },
   { "<leader>fm", ":Marks!<CR>", desc = "Search marks" },
