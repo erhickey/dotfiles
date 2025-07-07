@@ -49,11 +49,6 @@ vim.call('plug#begin')
     Plug 'erhickey/bigquery-vim'
 
     -- ----------------------
-    -- LLM
-    -- ----------------------
-    Plug 'coder/claudecode.nvim'
-
-    -- ----------------------
     -- miscellaneous
     -- ----------------------
     Plug 'tpope/vim-commentary'
