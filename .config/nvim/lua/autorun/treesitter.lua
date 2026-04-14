@@ -1,26 +1,50 @@
-local disableOnLargeFiles = function()
-  return vim.fn.line2byte(vim.fn.line("$") + 1) > 100000
-end
-
-require('nvim-treesitter.configs').setup({
-  modules = {},
-  ensure_installed = {},
-  sync_install = false,
-  auto_install = true,
-  ignore_install = { 'all' },
-  highlight = {
-    enable = true,
-    disable = disableOnLargeFiles,
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-  indent = {
-    enable = true,
-    disable = disableOnLargeFiles,
-  },
-})
+require('nvim-treesitter').install {
+  'c',
+  'bash',
+  'angular',
+  'haskell',
+  'javascript',
+  'lua',
+  'markdown',
+  'nix',
+  'python',
+  'rust',
+  'sql',
+  'typescript',
+  'vim',
+  'vimdoc',
+}
 
 require('treesitter-context').setup()
+
+local filetypes = {
+  'c',
+  'bash',
+  'haskell',
+  'htmlangular',
+  'javascript',
+  'lua',
+  'markdown',
+  'nix',
+  'python',
+  'rust',
+  'sql',
+  'typescript',
+  'vim',
+}
+
+for _, filetype in pairs(filetypes) do
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = { filetype },
+    callback = function()
+      -- enable treesitter syntax highlighting
+      vim.treesitter.start()
+      -- enable treesitter folding
+      vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+      vim.wo[0][0].foldmethod = 'expr'
+    end,
+  })
+end
+
+-- all folds open on file open
+vim.opt.foldlevelstart = 99

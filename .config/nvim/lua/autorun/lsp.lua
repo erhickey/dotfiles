@@ -117,26 +117,35 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
-local lspconfig = require('lspconfig')
-
-lspconfig.angularls.setup{
-  root_dir = lspconfig.util.root_pattern('node_modules'),
+local default_config = {
   capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
 }
 
-lspconfig.clojure_lsp.setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
+---@param name string language server name
+---@param config? vim.lsp.Config
+vim.lsp.setup = function(name, config)
+  vim.lsp.config[name] = config or default_config
+  vim.lsp.enable(name)
+  vim.cmd('doautocmd FileType') -- re-trigger filetype detection in case server was enabled after initial run
+end
 
-lspconfig.eslint.setup{
+vim.lsp.setup('clojure_lsp')
+vim.lsp.setup('eslint')
+vim.lsp.setup('jsonls')
+vim.lsp.setup('nil_ls')
+vim.lsp.setup('pyright')
+vim.lsp.setup('ruff')
+vim.lsp.setup('rust_analyzer')
+vim.lsp.setup('ts_ls')
+
+vim.lsp.setup('angularls', {
+  root_markers = { 'node_modules' },
   capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
-}
+})
 
 local on_attach_haskell = function(client, bufnr)
   on_attach_plus_format(client, bufnr)
@@ -144,7 +153,7 @@ local on_attach_haskell = function(client, bufnr)
   vim.api.nvim_command('autocmd BufReadPost,CursorMoved,InsertLeave <buffer> lua vim.lsp.codelens.refresh()')
 end
 
-lspconfig.hls.setup{
+vim.lsp.setup('hls', {
   capabilities = capabilities,
   on_attach = on_attach_haskell,
   flags = lsp_flags,
@@ -155,16 +164,10 @@ lspconfig.hls.setup{
       formatOnImportOn = true,
       formattingProvider = 'floskell'
     }
-  }
-}
+  },
+})
 
-lspconfig.jsonls.setup{
-  capabilities = capabilities,
-  on_attach = on_attach_format,
-  flags = lsp_flags,
-}
-
-lspconfig.lua_ls.setup{
+vim.lsp.setup('lua_ls', {
   capabilities = capabilities,
   on_attach = on_attach,
   flags = lsp_flags,
@@ -185,42 +188,12 @@ lspconfig.lua_ls.setup{
       },
     },
   },
-}
-
-lspconfig.nil_ls.setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
-
-lspconfig.pyright.setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
-
-lspconfig.ruff.setup{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
-
-lspconfig.rust_analyzer.setup{
-  capabilities = capabilities,
-  on_attach = on_attach_plus_format,
-  flags = lsp_flags,
-}
-
-lspconfig.ts_ls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
+})
 
 local tsc = vim.fn.trim(vim.fn.system('which tsc'))
 if not (tsc == nil or tsc == '') then
   local tsdk, _ = tsc:gsub('bin/tsc', 'lib/node_modules/typescript/lib/')
-  lspconfig.volar.setup{
+  vim.lsp.setup('volar', {
     capabilities = capabilities,
     on_attach = on_attach,
     flags = lsp_flags,
@@ -229,10 +202,10 @@ if not (tsc == nil or tsc == '') then
         tsdk = tsdk
       }
     },
-  }
+  })
 end
 
-lspconfig.diagnosticls.setup{
+vim.lsp.setup('diagnosticls', {
   capabilities = capabilities,
   on_attach = on_attach_plus_format,
   flags = lsp_flags,
@@ -242,6 +215,7 @@ lspconfig.diagnosticls.setup{
     'typescript',
     'javascript',
     'html',
+    'htmlangular',
   },
   init_options = {
     filetypes = {
@@ -253,6 +227,7 @@ lspconfig.diagnosticls.setup{
       typescript = 'prettierd',
       javascript = 'prettierd',
       html = 'prettierd',
+      htmlangular = 'prettierd',
     },
     linters = {
       shellcheck = {
@@ -381,4 +356,4 @@ lspconfig.diagnosticls.setup{
       }
     }
   }
-}
+})

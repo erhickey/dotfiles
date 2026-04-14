@@ -72,7 +72,7 @@ prompt_command() {
   autoenv
 }
 
-COLOR_RESET="\\[\\e[0m\\]"
+RESET_TEXT="\\[\\e[0m\\]"
 BOLD_TEXT="\\[\\e[1m\\]"
 FG_RESET="\\e[38;5;12m\\]"
 BG_RESET="\\e[48;5;8m\\]"

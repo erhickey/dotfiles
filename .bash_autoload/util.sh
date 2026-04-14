@@ -3,8 +3,8 @@
 function clipb() {
   case "$(uname -a)" in
 
-    *Microsoft*)
-      clip.exe
+    *[Mm]icrosoft*)
+      /mnt/c/Windows/System32/clip.exe
       ;;
 
     *Darwin*)
@@ -36,8 +36,8 @@ function lsg() {
 
   case "$(uname -a)" in
 
-    *Microsoft*)
-      explorer.exe "$dir"
+    *[Mm]icrosoft*)
+      /mnt/c/Windows/explorer.exe "$dir"
       ;;
 
     *Darwin*)
